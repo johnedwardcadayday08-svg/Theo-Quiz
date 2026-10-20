@@ -20,6 +20,7 @@
         * {
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            box-sizing: border-box;
         }
 
         body {
@@ -31,7 +32,6 @@
             margin: 0;
             padding: 12px;
             min-height: 100vh;
-            box-sizing: border-box;
             position: relative;
             overflow-x: hidden;
             display: flex;
@@ -57,7 +57,7 @@
 
         @keyframes buttonBreathAnim {
             0% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
-            50% { transform: scale(1.04); box-shadow: 0 6px 25px rgba(244, 114, 182, 0.8); }
+            50% { transform: scale(1.03); box-shadow: 0 6px 25px rgba(244, 114, 182, 0.8); }
             100% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
         }
 
@@ -78,37 +78,38 @@
         }
         .icon-1 { top: 6%; left: 2%; } .icon-2 { top: 10%; right: 3%; animation-delay: 1s; } .icon-3 { bottom: 22%; left: 3%; animation-delay: 2s; }
 
+        /* Pinalaki at isinagad sa mismong kanan ang profile picture */
         .side-profile-container {
-            position: fixed; right: 0; bottom: 0; width: 270px; height: 62vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
+            position: fixed; right: 0; bottom: 0; width: 320px; height: 75vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
         }
-        .side-profile-img { width: 100%; height: auto; max-height: 100%; object-fit: contain; }
+        .side-profile-img { width: 100%; height: 100%; object-fit: contain; object-position: bottom right; }
 
+        /* Inalis ang QR code pakaliwa sa tapat ng yellow line mark */
         .qr-code-wrapper {
-            position: fixed; z-index: 10; background: rgba(30, 41, 59, 0.75); border: 2px solid rgba(192, 132, 252, 0.6); padding: 8px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; right: 35px; bottom: 55vh;
+            position: fixed; z-index: 10; background: rgba(30, 41, 59, 0.85); border: 2px solid rgba(192, 132, 252, 0.7); padding: 10px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; right: 170px; bottom: 42vh;
             animation: floatingGlowAnim 5s infinite ease-in-out;
         }
-        .qr-code-wrapper p { margin: 3px 0 0 0; font-size: 10px; font-weight: bold; color: #f3e8ff; }
+        .qr-code-wrapper p { margin: 4px 0 0 0; font-size: 11px; font-weight: bold; color: #f3e8ff; }
         #qrcode { padding: 5px; background: #ffffff; border-radius: 8px; }
 
-        /* Pinalaki at in-extend pababa ang main container para dumikit sa message box */
+        /* Pinalawak at idinikit ang main container sa bottom message box */
         .container { 
-            position: relative; z-index: 3; max-width: 950px; width: 100%; margin: 10px auto 5px auto; 
-            background: var(--card-bg-transparent); padding: 32px 34px 42px 34px; border-radius: 28px; 
+            position: relative; z-index: 3; max-width: 960px; width: 100%; margin: 10px auto 6px auto; 
+            background: var(--card-bg-transparent); padding: 30px 34px 36px 34px; border-radius: 28px; 
             backdrop-filter: blur(8px); border: 2px solid rgba(192, 132, 252, 0.5); 
-            box-sizing: border-box;
             animation: pulseGlowEffect 4s infinite ease-in-out;
         }
 
-        /* Servant of God message box sa bandang baba */
+        /* Servant of God Message Box */
         .servant-message-box {
-            position: relative; z-index: 3; max-width: 950px; width: 100%; margin: 0 auto 10px auto;
-            background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(244, 114, 182, 0.6);
+            position: relative; z-index: 3; max-width: 960px; width: 100%; margin: 0 auto 8px auto;
+            background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(244, 114, 182, 0.65);
             padding: 12px 20px; border-radius: 20px; text-align: center; backdrop-filter: blur(8px);
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
             animation: floatingGlowAnim 4.5s infinite ease-in-out;
         }
         .servant-message-box p {
-            margin: 0; font-size: 13.5px; font-weight: 700; color: #f3e8ff;
+            margin: 0; font-size: 14px; font-weight: 700; color: #f3e8ff;
             text-shadow: 0 0 10px rgba(244, 114, 182, 0.8);
             letter-spacing: 0.5px;
         }
@@ -124,28 +125,29 @@
         .glowing-frame { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 10px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .glowing-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #1e293b; }
 
-        .app-logo { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.9); animation: floatingGlowAnim 3.5s infinite ease-in-out; }
+        .app-logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.9); animation: floatingGlowAnim 3.5s infinite ease-in-out; }
         .animated-header-title { 
-            font-size: 24px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 10px 0 6px 0;
+            font-size: 26px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 10px 0 6px 0;
             text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 25px rgba(244, 114, 182, 0.6);
             animation: floatingGlowAnim 4s infinite ease-in-out;
         }
         
         .btn { 
-            background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 14px 28px; font-size: 15px; border-radius: 16px; cursor: pointer; font-weight: bold; margin: 8px auto; display: inline-block; 
+            background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 14px 28px; font-size: 16px; border-radius: 16px; cursor: pointer; font-weight: bold; margin: 8px auto; display: inline-block; 
             box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5);
             animation: buttonBreathAnim 3s infinite ease-in-out;
         }
         .btn:hover { transform: scale(1.05); }
 
         .animated-main-btn {
-            padding: 16px 36px !important; font-size: 18px !important; border-radius: 18px !important;
+            padding: 16px 38px !important; font-size: 18px !important; border-radius: 18px !important;
             background: linear-gradient(135deg, #c084fc, #7c3aed, #f472b6);
             background-size: 200% 200%;
         }
 
-        .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 12px; margin-top: 10px; }
-        .attorney-buttons-container .group-btn { width: 100%; max-width: 320px; padding: 16px 20px; color: #ffffff; font-size: 16.5px; font-weight: bold; border: none; border-radius: 16px; cursor: pointer; animation: buttonBreathAnim 3s infinite ease-in-out; }
+        /* Soul Buttons - Pinalaki ang size para ma-occupy nang maganda ang space */
+        .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 14px; margin-top: 14px; }
+        .attorney-buttons-container .group-btn { width: 100%; max-width: 320px; padding: 18px 24px; color: #ffffff; font-size: 18px; font-weight: 800; border: none; border-radius: 18px; cursor: pointer; animation: buttonBreathAnim 3s infinite ease-in-out; }
         .attorney-btn-1 { background: linear-gradient(135deg, #38bdf8, #0284c7) !important; animation-delay: 0s !important; }
         .attorney-btn-2 { background: linear-gradient(135deg, #a855f7, #7c3aed) !important; animation-delay: 0.5s !important; }
         .attorney-btn-3 { background: linear-gradient(135deg, #10b981, #059669) !important; animation-delay: 1s !important; }
@@ -153,7 +155,7 @@
 
         @media (min-width: 768px) {
             .attorney-buttons-container { flex-direction: row; justify-content: center; gap: 16px; }
-            .attorney-buttons-container .group-btn { width: auto; flex: 1; max-width: 210px; }
+            .attorney-buttons-container .group-btn { width: auto; flex: 1; max-width: 220px; }
         }
 
         .header-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.45); padding: 12px 18px; border-radius: 16px; margin-bottom: 15px; font-weight: bold; color: #f3e8ff; }
@@ -165,10 +167,21 @@
         .bar-score { font-weight: bold; width: 40px; text-align: right; color: #f3e8ff; }
         .attorney-avatar-mini { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #c084fc; }
 
-        .question-card { background: rgba(15, 23, 42, 0.35); border: 1.5px solid rgba(255, 255, 255, 0.3); padding: 18px; border-radius: 16px; margin-bottom: 16px; }
-        .options { display: flex; flex-direction: column; gap: 6px; }
-        .options label { display: flex; align-items: center; padding: 8px 12px; background: rgba(14, 116, 144, 0.25); border: 1px solid rgba(56, 189, 248, 0.45); border-radius: 10px; cursor: pointer; font-size: 13px; color: #ffffff; font-weight: 600; }
-        .options label input { margin-right: 10px; transform: scale(1.2); accent-color: #38bdf8; }
+        /* Quiz Question Cards Adjustment para sa PC at Cellphone */
+        .question-card { background: rgba(15, 23, 42, 0.55); border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 22px; border-radius: 18px; margin-bottom: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .question-card p { font-size: 16px; line-height: 1.5; color: #ffffff; margin-top: 0; margin-bottom: 14px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .options label { display: flex; align-items: center; padding: 12px 16px; background: rgba(14, 116, 144, 0.3); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 12px; cursor: pointer; font-size: 15px; color: #ffffff; font-weight: 600; transition: all 0.2s ease; }
+        .options label:hover { background: rgba(14, 116, 144, 0.5); border-color: #38bdf8; }
+        .options label input { margin-right: 12px; transform: scale(1.3); accent-color: #38bdf8; }
+
+        @media (max-width: 600px) {
+            .question-card p { font-size: 15px; }
+            .options label { font-size: 14px; padding: 10px 12px; }
+            .animated-header-title { font-size: 20px; }
+            .side-profile-container { width: 220px; height: 50vh; }
+            .qr-code-wrapper { right: 15px; bottom: 35vh; }
+        }
 
         #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 20px; padding: 22px; text-align: center; font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 20px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .option-correct { background: rgba(16, 185, 129, 0.45) !important; border-color: #10b981 !important; }
@@ -204,10 +217,12 @@
     <div class="law-bg-element icon-2">🔥</div>
     <div class="law-bg-element icon-3">👼</div>
 
-    <div class="side-profile-container">
+    <!-- Pinalaking Profile Photo (First Page Only) -->
+    <div class="side-profile-container" id="profile-container">
         <img src="my-photo.png" alt="Profile" class="side-profile-img">
     </div>
 
+    <!-- QR Code Wrapper (First Page Only) -->
     <div class="qr-code-wrapper" id="qr-wrapper">
         <div id="qrcode"></div>
         <p>📱 SCAN TO JOIN</p>
@@ -246,14 +261,14 @@
         </div>
     </div>
 
-    <!-- Main Container (Pinalaki at in-extend pababa) -->
+    <!-- Main Container -->
     <div class="container" id="main-container">
         <div id="role-select">
             <div style="text-align:center;"><img src="logo.png" alt="Logo" class="app-logo"></div>
             <h1 class="animated-header-title">☁️ THEOLOGY 5 GROUP 1 QUICK ACTIVITY 🔥</h1>
-            <p style="text-align:center; color: #e9d5ff;">Select your mode to begin:</p>
+            <p style="text-align:center; color: #e9d5ff; font-weight:600;">Select your mode to begin:</p>
             <button class="btn animated-main-btn" style="margin-bottom: 12px; display:block; margin-left:auto; margin-right:auto;" onclick="selectRole('teacher')">☁️ God's Monitor to Earth 🌍</button>
-            <h3 style="text-align:center; color: #f472b6;">Join as Soul:</h3>
+            <h3 style="text-align:center; color: #f472b6; margin-top: 18px;">Join as Soul:</h3>
             <div class="attorney-buttons-container">
                 <button class="group-btn attorney-btn-1" onclick="selectGroup('Soul 1')">Soul 1</button>
                 <button class="group-btn attorney-btn-2" onclick="selectGroup('Soul 2')">Soul 2</button>
@@ -285,22 +300,22 @@
             <div id="review-section" style="margin-top: 25px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 25px; border-radius: 22px; display: none; width: 100%; box-sizing: border-box;">
                 <h3 style="color: #c084fc; text-align: center;">📜 Detailed Review & Explanations</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 15px;">
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q1: Early Christian Mission</p><p style="font-size:12px;">Jesus directed His initial mission to the "lost sheep of the house of" which group[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Israel</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q2: Paul's Ministry</p><p style="font-size:12px;">Paul carried the Christian message beyond Jerusalem, conducting missions primarily in Asia Minor and which region[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Greece</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q3: Patristic Period</p><p style="font-size:12px;">Which church father taught that the church is a mixed body of saints and sinners[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Augustine</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q4: Medieval Monasticism</p><p style="font-size:12px;">Who served as the primary missionaries establishing monasteries in Ireland[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: St. Patrick</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q5: Conversion Methods</p><p style="font-size:12px;">What method of conversion involved leaders like Clovis or Charlemagne converting first[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Top-down ruler conversions</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q6: Mendicant Orders</p><p style="font-size:12px;">Which order founded by St. Francis of Assisi engaged in active preaching outside monastery walls[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Franciscans</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q7: Modern Missions Pioneer</p><p style="font-size:12px;">Who launched the Baptist Missionary Society in 1792, known as the "Father of Modern Missions"[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: William Carey</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q8: Voluntary Societies</p><p style="font-size:12px;">Who founded the China Inland Mission focusing on unreached inland territories[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Hudson Taylor</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q9: Global Shift</p><p style="font-size:12px;">In the 20th and 21st centuries, the center of gravity for Christian missions shifted to which region[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Global South</b>[cite: 1]</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q10: Mission Movement Nature</p><p style="font-size:12px;">Today, Christian mission has been transformed into a global, multi-directional movement known as what[cite: 1]?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Polycentrism</b>[cite: 1]</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q1: Early Christian Mission</p><p style="font-size:12px;">Jesus directed His initial mission to the "lost sheep of the house of" which group?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Israel</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q2: Paul's Ministry</p><p style="font-size:12px;">Paul carried the Christian message beyond Jerusalem, conducting missions primarily in Asia Minor and which region?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Greece</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q3: Patristic Period</p><p style="font-size:12px;">Which church father taught that the church is a mixed body of saints and sinners?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Augustine</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q4: Medieval Monasticism</p><p style="font-size:12px;">Who served as the primary missionaries establishing monasteries in Ireland?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: St. Patrick</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q5: Conversion Methods</p><p style="font-size:12px;">What method of conversion involved leaders like Clovis or Charlemagne converting first?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Top-down ruler conversions</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q6: Mendicant Orders</p><p style="font-size:12px;">Which order founded by St. Francis of Assisi engaged in active preaching outside monastery walls?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Franciscans</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q7: Modern Missions Pioneer</p><p style="font-size:12px;">Who launched the Baptist Missionary Society in 1792, known as the "Father of Modern Missions"?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: William Carey</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q8: Voluntary Societies</p><p style="font-size:12px;">Who founded the China Inland Mission focusing on unreached inland territories?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Hudson Taylor</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q9: Global Shift</p><p style="font-size:12px;">In the 20th and 21st centuries, the center of gravity for Christian missions shifted to which region?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Global South</b></p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q10: Mission Movement Nature</p><p style="font-size:12px;">Today, Christian mission has been transformed into a global, multi-directional movement known as what?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Polycentrism</b></p></div>
                 </div>
             </div>
         </div>
 
         <div id="student-view" class="hidden">
-            <h1 id="group-title" style="color:#f3e8ff; font-size:20px;">Soul Dashboard</h1>
+            <h1 id="group-title" style="color:#f3e8ff; font-size:22px; text-align:center;">Soul Dashboard</h1>
             <div class="header-bar">
                 <span id="student-timer">Time Left: 01:30</span>
                 <span id="group-score-display">Score: 0 / 10</span>
@@ -316,29 +331,29 @@
                 <div id="quiz-questions" style="pointer-events:none; opacity:0.5;">
                     <!-- Q1 -->
                     <div class="question-card">
-                        <p><b>Q1:</b> Jesus directed His initial mission to the "lost sheep of the house of" which group[cite: 1]?</p>
+                        <p><b>Q1:</b> Jesus directed His initial mission to the "lost sheep of the house of" which group?</p>
                         <div class="options">
                             <label><input type="radio" name="q1" value="A" onchange="submitAns('q1', 'A')"> A) Gentiles</label>
-                            <label><input type="radio" name="q1" value="B" onchange="submitAns('q1', 'B')"> B) Israel[cite: 1]</label>
+                            <label><input type="radio" name="q1" value="B" onchange="submitAns('q1', 'B')"> B) Israel</label>
                             <label><input type="radio" name="q1" value="C" onchange="submitAns('q1', 'C')"> C) Samaria</label>
                             <label><input type="radio" name="q1" value="D" onchange="submitAns('q1', 'D')"> D) Rome</label>
                         </div>
                     </div>
                     <!-- Q2 -->
                     <div class="question-card">
-                        <p><b>Q2:</b> Paul carried the Christian message beyond Jerusalem, conducting missions primarily in Asia Minor and which region[cite: 1]?</p>
+                        <p><b>Q2:</b> Paul carried the Christian message beyond Jerusalem, conducting missions primarily in Asia Minor and which region?</p>
                         <div class="options">
                             <label><input type="radio" name="q2" value="A" onchange="submitAns('q2', 'A')"> A) Egypt</label>
-                            <label><input type="radio" name="q2" value="B" onchange="submitAns('q2', 'B')"> B) Greece[cite: 1]</label>
+                            <label><input type="radio" name="q2" value="B" onchange="submitAns('q2', 'B')"> B) Greece</label>
                             <label><input type="radio" name="q2" value="C" onchange="submitAns('q2', 'C')"> C) Persia</label>
                             <label><input type="radio" name="q2" value="D" onchange="submitAns('q2', 'D')"> D) Spain</label>
                         </div>
                     </div>
                     <!-- Q3 -->
                     <div class="question-card">
-                        <p><b>Q3:</b> Which church father taught that the church is a mixed body of saints and sinners[cite: 1]?</p>
+                        <p><b>Q3:</b> Which church father taught that the church is a mixed body of saints and sinners?</p>
                         <div class="options">
-                            <label><input type="radio" name="q3" value="A" onchange="submitAns('q3', 'A')"> A) Augustine[cite: 1]</label>
+                            <label><input type="radio" name="q3" value="A" onchange="submitAns('q3', 'A')"> A) Augustine</label>
                             <label><input type="radio" name="q3" value="B" onchange="submitAns('q3', 'B')"> B) Pelagius</label>
                             <label><input type="radio" name="q3" value="C" onchange="submitAns('q3', 'C')"> C) Tertullian</label>
                             <label><input type="radio" name="q3" value="D" onchange="submitAns('q3', 'D')"> D) Cyprian</label>
@@ -346,19 +361,19 @@
                     </div>
                     <!-- Q4 -->
                     <div class="question-card">
-                        <p><b>Q4:</b> Who served as the primary missionaries establishing monasteries in Ireland[cite: 1]?</p>
+                        <p><b>Q4:</b> Who served as the primary missionaries establishing monasteries in Ireland?</p>
                         <div class="options">
                             <label><input type="radio" name="q4" value="A" onchange="submitAns('q4', 'A')"> A) St. Boniface</label>
                             <label><input type="radio" name="q4" value="B" onchange="submitAns('q4', 'B')"> B) St. Augustine of Canterbury</label>
-                            <label><input type="radio" name="q4" value="C" onchange="submitAns('q4', 'C')"> C) St. Patrick[cite: 1]</label>
+                            <label><input type="radio" name="q4" value="C" onchange="submitAns('q4', 'C')"> C) St. Patrick</label>
                             <label><input type="radio" name="q4" value="D" onchange="submitAns('q4', 'D')"> D) William Carey</label>
                         </div>
                     </div>
                     <!-- Q5 -->
                     <div class="question-card">
-                        <p><b>Q5:</b> What method of conversion involved rulers like Clovis or Charlemagne converting first[cite: 1]?</p>
+                        <p><b>Q5:</b> What method of conversion involved rulers like Clovis or Charlemagne converting first?</p>
                         <div class="options">
-                            <label><input type="radio" name="q5" value="A" onchange="submitAns('q5', 'A')"> A) Top-down ruler conversions[cite: 1]</label>
+                            <label><input type="radio" name="q5" value="A" onchange="submitAns('q5', 'A')"> A) Top-down ruler conversions</label>
                             <label><input type="radio" name="q5" value="B" onchange="submitAns('q5', 'B')"> B) Grassroots monastic teaching</label>
                             <label><input type="radio" name="q5" value="C" onchange="submitAns('q5', 'C')"> C) Mendicant dialogical missions</label>
                             <label><input type="radio" name="q5" value="D" onchange="submitAns('q5', 'D')"> D) Pietist missions</label>
@@ -366,29 +381,29 @@
                     </div>
                     <!-- Q6 -->
                     <div class="question-card">
-                        <p><b>Q6:</b> Which order founded by St. Francis of Assisi engaged in active preaching outside monastery walls[cite: 1]?</p>
+                        <p><b>Q6:</b> Which order founded by St. Francis of Assisi engaged in active preaching outside monastery walls?</p>
                         <div class="options">
                             <label><input type="radio" name="q6" value="A" onchange="submitAns('q6', 'A')"> A) Dominicans</label>
-                            <label><input type="radio" name="q6" value="B" onchange="submitAns('q6', 'B')"> B) Franciscans[cite: 1]</label>
+                            <label><input type="radio" name="q6" value="B" onchange="submitAns('q6', 'B')"> B) Franciscans</label>
                             <label><input type="radio" name="q6" value="C" onchange="submitAns('q6', 'C')"> C) Moravians</label>
                             <label><input type="radio" name="q6" value="D" onchange="submitAns('q6', 'D')"> D) Jesuits</label>
                         </div>
                     </div>
                     <!-- Q7 -->
                     <div class="question-card">
-                        <p><b>Q7:</b> Who launched the Baptist Missionary Society in 1792, known as the "Father of Modern Missions"[cite: 1]?</p>
+                        <p><b>Q7:</b> Who launched the Baptist Missionary Society in 1792, known as the "Father of Modern Missions"?</p>
                         <div class="options">
                             <label><input type="radio" name="q7" value="A" onchange="submitAns('q7', 'A')"> A) Hudson Taylor</label>
                             <label><input type="radio" name="q7" value="B" onchange="submitAns('q7', 'B')"> B) Count Zinzendorf</label>
-                            <label><input type="radio" name="q7" value="C" onchange="submitAns('q7', 'C')"> C) William Carey[cite: 1]</label>
+                            <label><input type="radio" name="q7" value="C" onchange="submitAns('q7', 'C')"> C) William Carey</label>
                             <label><input type="radio" name="q7" value="D" onchange="submitAns('q7', 'D')"> D) David Livingstone</label>
                         </div>
                     </div>
                     <!-- Q8 -->
                     <div class="question-card">
-                        <p><b>Q8:</b> Who founded the China Inland Mission focusing on unreached inland territories[cite: 1]?</p>
+                        <p><b>Q8:</b> Who founded the China Inland Mission focusing on unreached inland territories?</p>
                         <div class="options">
-                            <label><input type="radio" name="q8" value="A" onchange="submitAns('q8', 'A')"> A) Hudson Taylor[cite: 1]</label>
+                            <label><input type="radio" name="q8" value="A" onchange="submitAns('q8', 'A')"> A) Hudson Taylor</label>
                             <label><input type="radio" name="q8" value="B" onchange="submitAns('q8', 'B')"> B) William Carey</label>
                             <label><input type="radio" name="q8" value="C" onchange="submitAns('q8', 'C')"> C) St. Patrick</label>
                             <label><input type="radio" name="q8" value="D" onchange="submitAns('q8', 'D')"> D) Count Zinzendorf</label>
@@ -396,20 +411,20 @@
                     </div>
                     <!-- Q9 -->
                     <div class="question-card">
-                        <p><b>Q9:</b> In the 20th and 21st centuries, the center of gravity for Christian missions shifted to which region[cite: 1]?</p>
+                        <p><b>Q9:</b> In the 20th and 21st centuries, the center of gravity for Christian missions shifted to which region?</p>
                         <div class="options">
                             <label><input type="radio" name="q9" value="A" onchange="submitAns('q9', 'A')"> A) Western Europe</label>
                             <label><input type="radio" name="q9" value="B" onchange="submitAns('q9', 'B')"> B) North America</label>
-                            <label><input type="radio" name="q9" value="C" onchange="submitAns('q9', 'C')"> C) Global South[cite: 1]</label>
+                            <label><input type="radio" name="q9" value="C" onchange="submitAns('q9', 'C')"> C) Global South</label>
                             <label><input type="radio" name="q9" value="D" onchange="submitAns('q9', 'D')"> D) Eastern Europe</label>
                         </div>
                     </div>
                     <!-- Q10 -->
                     <div class="question-card">
-                        <p><b>Q10:</b> Today, Christian mission has been transformed into a global, multi-directional movement known as what[cite: 1]?</p>
+                        <p><b>Q10:</b> Today, Christian mission has been transformed into a global, multi-directional movement known as what?</p>
                         <div class="options">
                             <label><input type="radio" name="q10" value="A" onchange="submitAns('q10', 'A')"> A) Monasticism</label>
-                            <label><input type="radio" name="q10" value="B" onchange="submitAns('q10', 'B')"> B) Polycentrism[cite: 1]</label>
+                            <label><input type="radio" name="q10" value="B" onchange="submitAns('q10', 'B')"> B) Polycentrism</label>
                             <label><input type="radio" name="q10" value="C" onchange="submitAns('q10', 'C')"> C) Pietism</label>
                             <label><input type="radio" name="q10" value="D" onchange="submitAns('q10', 'D')"> D) Colonialism</label>
                         </div>
@@ -419,9 +434,9 @@
         </div>
     </div>
 
-    <!-- Servant of God Message Box na idinagdag sa bandang ibaba ng first screen -->
-    <div class="servant-message-box">
-        <p>📖 "Whatever you do, work at it with all your heart, as working for the Lord..." – Colossians 3:23 ✨</p>
+    <!-- Servant of God Message Box (First Page Only) -->
+    <div class="servant-message-box" id="servant-box">
+        <p>📖 <b>SERVANT OF GOD MESSAGE:</b> "Whatever you do, work at it with all your heart, as working for the Lord..." – Colossians 3:23 ✨</p>
     </div>
 
     <script>
@@ -435,14 +450,19 @@
         let groupCompletedStatus = { 'Soul 1': false, 'Soul 2': false, 'Soul 3': false, 'Soul 4': false };
         let capturedDataUrl = '';
         let mediaStream = null;
-        let shownPopups = {};
 
         window.addEventListener('DOMContentLoaded', () => {
             new QRCode(document.getElementById("qrcode"), {
-                text: window.location.href, width: 75, height: 75, colorDark: "#6b21a8", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H
+                text: window.location.href, width: 80, height: 80, colorDark: "#6b21a8", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H
             });
             lockQuizUI();
         });
+
+        function hideFirstPageElements() {
+            document.getElementById('profile-container').style.display = 'none';
+            document.getElementById('qr-wrapper').style.display = 'none';
+            document.getElementById('servant-box').style.display = 'none';
+        }
 
         function lockQuizUI() {
             document.getElementById('quiz-questions').style.pointerEvents = 'none';
@@ -479,6 +499,7 @@
                 document.getElementById('password-modal').style.display = 'none';
                 document.getElementById('role-select').classList.add('hidden');
                 document.getElementById('teacher-view').classList.remove('hidden');
+                hideFirstPageElements();
             } else { alert("Wrong Password!"); }
         }
 
@@ -515,6 +536,7 @@
             document.getElementById('student-view').classList.remove('hidden');
             document.getElementById('group-title').innerText = `Dashboard: ${myGroup}`;
             document.getElementById('floating-timer-badge').style.display = 'flex';
+            hideFirstPageElements();
             if (!isGameStarted) lockQuizUI(); else unlockQuizUI();
         }
 
