@@ -24,34 +24,30 @@ let attorneyPhotos = {
     'Soul 4': ''
 };
 
-// Tama at nakatakdang sagot para sa 10 tanong
+// Tamang sagot para sa 10 tanong
 const correctAnswers = {
     q1: 'B', q2: 'B', q3: 'A', q4: 'C', q5: 'A',
     q6: 'B', q7: 'C', q8: 'A', q9: 'C', q10: 'B'
 };
 
 io.on('connection', (socket) => {
-    // Ipadala ang kasalukuyang estado ng laro sa bagong konektadong user
     socket.emit('gameState', { isGameStarted });
     socket.emit('updateState', { groupScores, photos: attorneyPhotos });
     socket.emit('timerUpdate', globalTimer);
 
-    // Kapag pumasok at nag-picture ang Soul participant
     socket.on('registerAttorneyPhoto', ({ groupName, photo }) => {
         if (groupName && photo) {
             attorneyPhotos[groupName] = photo;
             io.emit('updateState', { groupScores, photos: attorneyPhotos });
-            // I-broadcast sa monitor screen para sa 3-second popup
             io.emit('newParticipantJoined', { groupName, photo });
         }
     });
 
-    // Kapag pinindot ng Teacher / Facilitator ang "Start Quiz"
     socket.on('startTimer', () => {
-        if (isGameStarted) return; // Iwasan ang paulit-ulit na pag-start
+        if (isGameStarted) return;
 
         isGameStarted = true;
-        globalTimer = 90; // I-reset sa 1:30
+        globalTimer = 90;
 
         io.emit('gameState', { isGameStarted: true });
         io.emit('timerUpdate', globalTimer);
@@ -70,7 +66,6 @@ io.on('connection', (socket) => {
         }, 1000);
     });
 
-    // Kapag pinindot ang "Time's Up"
     socket.on('forceTimeUp', () => {
         clearInterval(timerInterval);
         globalTimer = 0;
@@ -80,19 +75,20 @@ io.on('connection', (socket) => {
         io.emit('timeUp');
     });
 
-    // Kapag pinindot ang "Reset"
+    // Kapag pinindot ang Reset -> Mawawala pati mga larawan ng participants
     socket.on('resetGame', () => {
         clearInterval(timerInterval);
         isGameStarted = false;
         globalTimer = 90;
         groupScores = { 'Soul 1': 0, 'Soul 2': 0, 'Soul 3': 0, 'Soul 4': 0 };
+        attorneyPhotos = { 'Soul 1': '', 'Soul 2': '', 'Soul 3': '', 'Soul 4': '' };
+        
         io.emit('gameState', { isGameStarted: false });
         io.emit('timerUpdate', globalTimer);
         io.emit('updateState', { groupScores, photos: attorneyPhotos });
         io.emit('closeWinnerModal');
     });
 
-    // Kapag nag-submit ng sagot ang participant
     socket.on('submitAnswer', ({ groupName, questionId, answer }) => {
         if (!isGameStarted) return;
 

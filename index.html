@@ -71,14 +71,6 @@
             100% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
         }
 
-        /* Moving & Glow effect para sa Heaven Standings Title */
-        @keyframes heavenTitleGlow {
-            0% { transform: translateY(0px); text-shadow: 0 0 10px #f472b6, 0 0 20px #a855f7; }
-            50% { transform: translateY(-4px); text-shadow: 0 0 18px #38bdf8, 0 0 30px #f472b6; }
-            100% { transform: translateY(0px); text-shadow: 0 0 10px #f472b6, 0 0 20px #a855f7; }
-        }
-
-        /* Moving & Glow Effect para sa Result Cards */
         @keyframes resultCardGlow {
             0% { transform: translateY(0px) scale(1); box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
             50% { transform: translateY(-4px) scale(1.01); box-shadow: 0 0 25px rgba(244, 114, 182, 0.8); }
@@ -107,13 +99,11 @@
         .emoji-5 { top: 48%; left: 1%; animation-delay: 2.5s; font-size: 26px; }
         .emoji-6 { top: 32%; right: 1.5%; animation-delay: 0.8s; font-size: 28px; }
 
-        /* Profile Photo sa KANAN */
         .side-profile-container {
             position: fixed; right: 0; bottom: 0; width: 280px; height: 70vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
         }
         .side-profile-img { width: 100%; height: 100%; object-fit: contain; object-position: bottom right; }
 
-        /* Left photo: Inibaba nang kaunti (top: 18%) para maging mas proportioned */
         .yellow-circle-photo-wrapper {
             position: fixed;
             top: 18%;
@@ -141,7 +131,6 @@
         .qr-code-wrapper p { margin: 2px 0 0 0; font-size: 9px; font-weight: bold; color: #f3e8ff; }
         #qrcode { padding: 3px; background: #ffffff; border-radius: 6px; }
 
-        /* Main Container */
         .container { 
             position: relative; z-index: 3; max-width: 1280px; width: 96%; 
             margin: 0 auto 10px auto; 
@@ -170,7 +159,6 @@
             height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; position: relative;
         }
 
-        /* Monitor Layout */
         #teacher-view {
             height: 100%; display: flex; flex-direction: column; justify-content: space-between;
         }
@@ -180,7 +168,6 @@
         .judge-left-box { background: rgba(15, 23, 42, 0.55); border: 1.5px solid rgba(168, 85, 247, 0.5); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
         .judge-right-box { background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(192, 132, 252, 0.55); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
 
-        /* Tumaas na Podium Area & Rank Bars */
         .podium-area { display: flex; justify-content: space-around; align-items: flex-end; width: 100%; height: 350px; margin-top: 4px; gap: 16px; }
         .podium-col { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
         .rank-bar-track { width: 100%; max-width: 68px; background: rgba(255, 255, 255, 0.12); border-radius: 14px 14px 0 0; display: flex; align-items: flex-end; height: 240px; border: 1.5px solid rgba(255, 255, 255, 0.25); }
@@ -188,10 +175,17 @@
         .glowing-frame { width: 72px; height: 72px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 8px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .glowing-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #1e293b; }
 
-        /* Animated Title para sa Heaven Standings */
+        /* Malinaw at High-Contrast na Heaven Standings Title */
         .animated-rank-title {
-            color: #f472b6; font-weight: 900; font-size: 20px; margin-bottom: 2px;
-            animation: heavenTitleGlow 3s infinite ease-in-out;
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 22px;
+            margin-bottom: 2px;
+            letter-spacing: 0.8px;
+            background: linear-gradient(135deg, #f472b6, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
         }
 
         .app-logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.95); animation: floatingGlowAnim 3.5s infinite ease-in-out; margin: 0 auto; display: block; }
@@ -237,7 +231,6 @@
 
         .header-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.45); padding: 12px 18px; border-radius: 16px; margin-bottom: 12px; font-weight: bold; color: #f3e8ff; }
         
-        /* Pinalaking Scoreboard Rows sa Kaliwa */
         .bar-chart-container { margin: 8px 0; background: rgba(15, 23, 42, 0.45); padding: 16px; border-radius: 18px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around; }
         .bar-row { display: flex; align-items: center; margin: 12px 0; gap: 16px; }
         .bar-label { width: 100px; font-weight: bold; font-size: 17px; color: #f3e8ff; }
@@ -246,7 +239,6 @@
         .bar-score { font-weight: bold; width: 60px; text-align: right; color: #f3e8ff; font-size: 18px; }
         .attorney-avatar-mini { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 3px solid #c084fc; box-shadow: 0 0 12px rgba(192, 132, 252, 0.6); }
 
-        /* Timer Badge sa Header sa tabi ng buttons */
         .main-timer-badge {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.85), rgba(5, 150, 105, 0.85));
             border: 1.5px solid #6ee7b7; color: #ffffff; font-size: 15px; font-weight: 800;
@@ -267,7 +259,6 @@
 
         #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 16px; padding: 18px; text-align: center; font-size: 16px; font-weight: 900; color: #ffffff; margin-bottom: 16px; animation: floatingGlowAnim 3s infinite ease-in-out; }
 
-        #floating-timer-badge { position: fixed; top: 18px; left: 20px; width: 55px; height: 55px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; z-index: 10006; animation: floatingGlowAnim 2s infinite ease-in-out; }
         #feedback-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 18px 36px; border-radius: 18px; font-size: 22px; font-weight: 900; color: white; z-index: 10005; display: none; text-align: center; }
         .feedback-correct { background: #10b981; } .feedback-wrong { background: #f43f5e; }
 
@@ -289,7 +280,6 @@
         #monitor-photo-popup.show { display: flex; flex-direction: column; align-items: center; opacity: 1; transform: translate(-50%, -50%) scale(1); }
         #monitor-photo-popup img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #38bdf8; margin-top: 10px; }
 
-        /* Animated Glowing Result Items */
         .result-item-card {
             animation: resultCardGlow 3s infinite ease-in-out;
         }
@@ -304,8 +294,6 @@
         <button class="control-btn surrender-btn" onclick="handleSurrender()">🏳️ Reset</button>
     </div>
 
-    <div id="floating-timer-badge"><span id="floating-timer-text">01:30</span></div>
-
     <!-- Floating Emojis -->
     <div class="heaven-hell-emoji emoji-1">☁️</div>
     <div class="heaven-hell-emoji emoji-2">🔥</div>
@@ -314,23 +302,19 @@
     <div class="heaven-hell-emoji emoji-5">⚡</div>
     <div class="heaven-hell-emoji emoji-6">🕊️</div>
 
-    <!-- Profile Photo sa KANAN -->
     <div class="side-profile-container" id="profile-container">
         <img src="my-photo.png" alt="Profile Right" class="side-profile-img">
     </div>
 
-    <!-- Left Photo sa labas sa kaliwa (inibaba nang kaunti) -->
     <div class="yellow-circle-photo-wrapper" id="left-photo-box">
         <img src="left-photo.png" alt="Left Photo" class="yellow-circle-photo-img">
     </div>
 
-    <!-- QR Code Wrapper -->
     <div class="qr-code-wrapper" id="qr-wrapper">
         <div id="qrcode"></div>
         <p>📱 SCAN TO JOIN</p>
     </div>
 
-    <!-- 3-Second Monitor Participant Photo Popup -->
     <div id="monitor-photo-popup">
         <h2 id="popup-soul-name" style="color: #f3e8ff; margin: 0; font-size: 22px; text-shadow: 0 0 10px #f472b6;">✨ Participant Joined! ✨</h2>
         <img id="popup-soul-img" src="" alt="Participant Photo">
@@ -369,7 +353,6 @@
         </div>
     </div>
 
-    <!-- Main Container -->
     <div class="container" id="main-container">
         <div id="role-select">
             <div><img src="logo.png" alt="Logo" class="app-logo"></div>
@@ -401,13 +384,11 @@
                     <div class="bar-chart-container" id="bar-chart"></div>
                 </div>
                 <div class="judge-right-box">
-                    <!-- Title na may moving at glow effects -->
                     <div class="animated-rank-title">👑 Heaven Standings ☁️</div>
                     <div class="podium-area" id="podium-display"></div>
                 </div>
             </div>
 
-            <!-- Review Area -->
             <div id="review-section" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 18px; border-radius: 18px; display: none; width: 100%; max-height: 250px; overflow-y: auto; box-sizing: border-box;">
                 <h3 style="color: #c084fc; text-align: center; margin-top:0;">📜 Detailed Review & Explanations</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 10px;">
@@ -545,7 +526,6 @@
         </div>
     </div>
 
-    <!-- Servant of God Message Box -->
     <div class="servant-message-box" id="servant-box">
         <p>📖 <b>SERVANT OF GOD MESSAGE:</b> "Whatever you do, work at it with all your heart, as working for the Lord..." – Colossians 3:23 ✨</p>
     </div>
@@ -648,7 +628,6 @@
             document.getElementById('role-select').classList.add('hidden');
             document.getElementById('student-view').classList.remove('hidden');
             document.getElementById('group-title').innerText = `Dashboard: ${myGroup}`;
-            document.getElementById('floating-timer-badge').style.display = 'flex';
             hideFirstPageElements();
             if (!isGameStarted) lockQuizUI(); else unlockQuizUI();
         }
@@ -732,12 +711,10 @@
             document.getElementById('podium-display').innerHTML = podiumHTML;
         }
 
-        /* Real-time Global Timer Sync */
         socket.on('timerUpdate', (timeSec) => {
             globalTimer = typeof timeSec === 'number' ? timeSec : (timeSec.global || 90);
             let timeStr = `${Math.floor(globalTimer/60).toString().padStart(2,'0')}:${(globalTimer%60).toString().padStart(2,'0')}`;
             document.getElementById('student-timer').innerText = `Time Left: ${timeStr}`;
-            document.getElementById('floating-timer-text').innerText = timeStr;
             document.getElementById('monitor-main-timer').innerText = timeStr;
             renderScoreboardAndPodium();
         });
