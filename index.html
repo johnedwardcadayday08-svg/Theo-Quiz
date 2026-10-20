@@ -23,19 +23,21 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Strict no scroll sa buong app */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Ginawang mas transparent ang dark overlay para mas litaw ang kulay at disenyo ng background photo */
             background: linear-gradient(rgba(15, 23, 42, 0.62), rgba(15, 23, 42, 0.62)), 
                         url('background.png') no-repeat center center fixed;
             background-size: cover;
             color: var(--text-color);
-            margin: 0;
+        }
+
+        body {
             padding: 10px 15px 12px 15px;
-            height: 100vh;
-            max-height: 100vh;
-            position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -51,7 +53,6 @@
             100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7)); }
         }
 
-        /* Floating animation para sa pinalaking left photo */
         @keyframes leftPhotoFloatingGlow {
             0% { transform: translateY(0px) rotate(-1deg); filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.85)) drop-shadow(0 0 30px rgba(56, 189, 248, 0.65)); }
             50% { transform: translateY(-8px) rotate(1deg); filter: drop-shadow(0 0 28px rgba(244, 114, 182, 0.95)) drop-shadow(0 0 40px rgba(168, 85, 247, 0.85)); }
@@ -85,14 +86,12 @@
             position: fixed; font-size: 30px; user-select: none; pointer-events: none; z-index: 2;
             animation: floatingGlowAnim 4s infinite ease-in-out;
         }
-        .emoji-1 { top: 8%; left: 3%; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8)); }
-        .emoji-2 { top: 12%; right: 4%; animation-delay: 1s; filter: drop-shadow(0 0 12px rgba(244, 63, 94, 0.9)); font-size: 34px; }
-        .emoji-3 { bottom: 18%; left: 3%; animation-delay: 2s; filter: drop-shadow(0 0 12px rgba(252, 211, 77, 0.9)); }
-        .emoji-4 { bottom: 14%; right: 5%; animation-delay: 1.5s; filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.9)); font-size: 34px; }
-        .emoji-5 { top: 48%; left: 1.5%; animation-delay: 2.5s; font-size: 26px; }
-        .emoji-6 { top: 32%; right: 2.5%; animation-delay: 0.8s; font-size: 28px; }
-        .emoji-7 { top: 70%; left: 6%; animation-delay: 3s; font-size: 26px; }
-        .emoji-8 { top: 18%; left: 48%; animation-delay: 1.2s; font-size: 24px; }
+        .emoji-1 { top: 8%; left: 2%; filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8)); }
+        .emoji-2 { top: 12%; right: 3%; animation-delay: 1s; filter: drop-shadow(0 0 12px rgba(244, 63, 94, 0.9)); font-size: 34px; }
+        .emoji-3 { bottom: 18%; left: 2%; animation-delay: 2s; filter: drop-shadow(0 0 12px rgba(252, 211, 77, 0.9)); }
+        .emoji-4 { bottom: 14%; right: 4%; animation-delay: 1.5s; filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.9)); font-size: 34px; }
+        .emoji-5 { top: 48%; left: 1%; animation-delay: 2.5s; font-size: 26px; }
+        .emoji-6 { top: 32%; right: 1.5%; animation-delay: 0.8s; font-size: 28px; }
 
         /* Profile Photo sa KANAN */
         .side-profile-container {
@@ -100,14 +99,14 @@
         }
         .side-profile-img { width: 100%; height: 100%; object-fit: contain; object-position: bottom right; }
 
-        /* Pinalaking Left Photo sakto sa dilaw na bilog */
+        /* Left photo: Inilipat nang husto sa kaliwa sa labas ng container para hindi tumama sa title */
         .yellow-circle-photo-wrapper {
-            position: absolute;
-            top: 15%;
+            position: fixed;
+            top: 12%;
             left: 1.5%;
-            width: 220px;
-            height: 220px;
-            z-index: 6;
+            width: 240px;
+            height: 240px;
+            z-index: 4;
             pointer-events: none;
             display: flex;
             align-items: center;
@@ -128,26 +127,27 @@
         .qr-code-wrapper p { margin: 2px 0 0 0; font-size: 9px; font-weight: bold; color: #f3e8ff; }
         #qrcode { padding: 3px; background: #ffffff; border-radius: 6px; }
 
-        /* Main Container */
+        /* Main Container: In-expand ang laki sa kanan at kaliwa (max-width: 1280px) */
         .container { 
-            position: relative; z-index: 3; max-width: 920px; width: 100%; 
-            margin: 0 auto 14px auto; 
+            position: relative; z-index: 3; max-width: 1280px; width: 96%; 
+            margin: 0 auto 10px auto; 
             flex-grow: 1;
-            background: var(--card-bg-transparent); padding: 18px 28px; border-radius: 24px; 
+            height: calc(100vh - 80px);
+            background: var(--card-bg-transparent); padding: 18px 30px; border-radius: 24px; 
             backdrop-filter: blur(8px); border: 2px solid rgba(192, 132, 252, 0.5); 
             animation: pulseGlowEffect 4s infinite ease-in-out;
             display: flex; flex-direction: column; justify-content: space-between;
         }
 
         .servant-message-box {
-            position: relative; z-index: 3; max-width: 920px; width: 100%; margin: 0 auto;
+            position: relative; z-index: 3; max-width: 1280px; width: 96%; margin: 0 auto;
             background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(244, 114, 182, 0.65);
             padding: 10px 18px; border-radius: 16px; text-align: center; backdrop-filter: blur(8px);
             box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
             animation: floatingGlowAnim 4.5s infinite ease-in-out;
         }
         .servant-message-box p {
-            margin: 0; font-size: 13px; font-weight: 700; color: #f3e8ff;
+            margin: 0; font-size: 13.5px; font-weight: 700; color: #f3e8ff;
             text-shadow: 0 0 8px rgba(244, 114, 182, 0.8);
             letter-spacing: 0.5px;
         }
@@ -156,23 +156,26 @@
             height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; position: relative;
         }
 
-        .judge-main-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; align-items: stretch; width: 100%; }
-        .judge-left-box { background: rgba(15, 23, 42, 0.5); border: 1.5px solid rgba(168, 85, 247, 0.45); border-radius: 18px; padding: 20px; }
-        .judge-right-box { background: rgba(15, 23, 42, 0.7); border: 2px solid rgba(192, 132, 252, 0.5); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        /* In-expand na Layout para sa God's Monitor */
+        #teacher-view {
+            height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .judge-main-layout { 
+            display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; align-items: stretch; width: 100%; flex-grow: 1; margin-top: 15px; 
+        }
+        .judge-left-box { background: rgba(15, 23, 42, 0.55); border: 1.5px solid rgba(168, 85, 247, 0.5); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+        .judge-right-box { background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(192, 132, 252, 0.55); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
 
-        .podium-area { display: flex; justify-content: space-around; align-items: flex-end; width: 100%; height: 280px; margin-top: 15px; gap: 12px; }
+        .podium-area { display: flex; justify-content: space-around; align-items: flex-end; width: 100%; height: 310px; margin-top: 10px; gap: 16px; }
         .podium-col { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
-        .rank-bar-track { width: 100%; max-width: 52px; background: rgba(255, 255, 255, 0.12); border-radius: 12px 12px 0 0; display: flex; align-items: flex-end; height: 170px; border: 1.5px solid rgba(255, 255, 255, 0.25); }
-        .rank-bar-fill { width: 100%; height: 0%; transition: height 0.6s ease; border-radius: 12px 12px 0 0; }
-        .glowing-frame { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 10px; animation: floatingGlowAnim 3s infinite ease-in-out; }
+        .rank-bar-track { width: 100%; max-width: 65px; background: rgba(255, 255, 255, 0.12); border-radius: 14px 14px 0 0; display: flex; align-items: flex-end; height: 190px; border: 1.5px solid rgba(255, 255, 255, 0.25); }
+        .rank-bar-fill { width: 100%; height: 0%; transition: height 0.6s ease; border-radius: 14px 14px 0 0; }
+        .glowing-frame { width: 72px; height: 72px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 10px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .glowing-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #1e293b; }
 
-        /* Pinalaking Logo */
         .app-logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.95); animation: floatingGlowAnim 3.5s infinite ease-in-out; margin: 0 auto; display: block; }
-        
-        /* Pinalaking Header Title */
         .animated-header-title { 
-            font-size: 26px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 2px 0;
+            font-size: 26px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 0 0 10px 0;
             text-shadow: 0 0 14px rgba(168, 85, 247, 0.85), 0 0 24px rgba(244, 114, 182, 0.7);
             animation: floatingGlowAnim 4s infinite ease-in-out;
             letter-spacing: 0.5px;
@@ -185,7 +188,6 @@
         }
         .btn:hover { transform: scale(1.05); }
 
-        /* Pinalaking God's Monitor Button */
         .animated-main-btn {
             padding: 16px 38px !important; font-size: 17.5px !important; border-radius: 18px !important;
             background: linear-gradient(135deg, #c084fc, #7c3aed, #f472b6);
@@ -194,7 +196,6 @@
             font-weight: 800 !important;
         }
 
-        /* Soul 1-4 Buttons */
         .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 12px; margin-top: 4px; }
         .attorney-buttons-container .group-btn { 
             width: 100%; max-width: 300px; padding: 24px 20px; min-height: 75px; 
@@ -209,30 +210,32 @@
 
         @media (min-width: 768px) {
             .attorney-buttons-container { flex-direction: row; justify-content: center; gap: 16px; }
-            .attorney-buttons-container .group-btn { width: auto; flex: 1; max-width: 200px; padding: 28px 18px; min-height: 85px; font-size: 21px; }
+            .attorney-buttons-container .group-btn { width: auto; flex: 1; max-width: 220px; padding: 28px 18px; min-height: 85px; font-size: 21px; }
         }
 
-        .header-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.45); padding: 10px 16px; border-radius: 14px; margin-bottom: 12px; font-weight: bold; color: #f3e8ff; }
-        .bar-chart-container { margin: 8px 0; background: rgba(15, 23, 42, 0.45); padding: 10px; border-radius: 14px; }
-        .bar-row { display: flex; align-items: center; margin: 8px 0; gap: 8px; }
-        .bar-label { width: 85px; font-weight: bold; font-size: 13px; color: #f3e8ff; }
-        .bar-track { flex-grow: 1; background: rgba(255, 255, 255, 0.25); height: 22px; border-radius: 8px; overflow: hidden; margin: 0 8px; }
-        .bar-fill { height: 100%; background: linear-gradient(90deg, #c084fc, #a855f7); width: 0%; border-radius: 8px; }
-        .bar-score { font-weight: bold; width: 40px; text-align: right; color: #f3e8ff; }
-        .attorney-avatar-mini { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #c084fc; }
+        .header-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.45); padding: 12px 18px; border-radius: 16px; margin-bottom: 12px; font-weight: bold; color: #f3e8ff; }
+        .bar-chart-container { margin: 8px 0; background: rgba(15, 23, 42, 0.45); padding: 14px; border-radius: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around; }
+        .bar-row { display: flex; align-items: center; margin: 10px 0; gap: 12px; }
+        .bar-label { width: 95px; font-weight: bold; font-size: 15px; color: #f3e8ff; }
+        .bar-track { flex-grow: 1; background: rgba(255, 255, 255, 0.25); height: 26px; border-radius: 10px; overflow: hidden; margin: 0 10px; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, #c084fc, #a855f7); width: 0%; border-radius: 10px; }
+        .bar-score { font-weight: bold; width: 50px; text-align: right; color: #f3e8ff; font-size: 16px; }
+        .attorney-avatar-mini { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2.5px solid #c084fc; }
 
-        .question-card { background: rgba(15, 23, 42, 0.55); border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 16px 20px; border-radius: 16px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-        .question-card p { font-size: 15px; line-height: 1.4; color: #ffffff; margin-top: 0; margin-bottom: 10px; }
-        .options { display: flex; flex-direction: column; gap: 8px; }
-        .options label { display: flex; align-items: center; padding: 10px 14px; background: rgba(14, 116, 144, 0.3); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 10px; cursor: pointer; font-size: 14px; color: #ffffff; font-weight: 600; transition: all 0.2s ease; }
-        .options label:hover { background: rgba(14, 116, 144, 0.5); border-color: #38bdf8; }
-        .options label input { margin-right: 10px; transform: scale(1.2); accent-color: #38bdf8; }
+        /* Quiz View Scrollable Area */
+        #student-view { height: 100%; display: flex; flex-direction: column; }
+        #student-view-wrapper { flex-grow: 1; overflow-y: auto; padding-right: 5px; } /* Pinayagan ang scrolling sa tanong */
+
+        .question-card { background: rgba(15, 23, 42, 0.65); border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 18px 22px; border-radius: 18px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .question-card p { font-size: 16px; line-height: 1.4; color: #ffffff; margin-top: 0; margin-bottom: 12px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .options label { display: flex; align-items: center; padding: 12px 16px; background: rgba(14, 116, 144, 0.35); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 12px; cursor: pointer; font-size: 15px; color: #ffffff; font-weight: 600; transition: all 0.2s ease; }
+        .options label:hover { background: rgba(14, 116, 144, 0.55); border-color: #38bdf8; }
+        .options label input { margin-right: 12px; transform: scale(1.3); accent-color: #38bdf8; }
 
         #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 16px; padding: 18px; text-align: center; font-size: 16px; font-weight: 900; color: #ffffff; margin-bottom: 16px; animation: floatingGlowAnim 3s infinite ease-in-out; }
-        .option-correct { background: rgba(16, 185, 129, 0.45) !important; border-color: #10b981 !important; }
-        .option-wrong { background: rgba(244, 63, 94, 0.45) !important; border-color: #f43f5e !important; }
 
-        #floating-timer-badge { position: fixed; top: 18px; left: 20px; width: 50px; height: 50px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; z-index: 10006; animation: floatingGlowAnim 2s infinite ease-in-out; }
+        #floating-timer-badge { position: fixed; top: 18px; left: 20px; width: 55px; height: 55px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; z-index: 10006; animation: floatingGlowAnim 2s infinite ease-in-out; }
         #feedback-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 18px 36px; border-radius: 18px; font-size: 22px; font-weight: 900; color: white; z-index: 10005; display: none; text-align: center; }
         .feedback-correct { background: #10b981; } .feedback-wrong { background: #f43f5e; }
 
@@ -245,8 +248,18 @@
         #webcam-video { width: 100%; max-width: 220px; height: 160px; border-radius: 18px; border: 3px solid #f472b6; object-fit: cover; margin: 10px auto; display: block; transform: scaleX(-1); }
         #captured-preview { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #38bdf8; margin: 10px auto; transform: scaleX(-1); }
 
+        /* 3-second Popup Photo Alert sa Monitor Screen */
+        #monitor-photo-popup {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7);
+            background: rgba(15, 23, 42, 0.92); border: 3px solid #f472b6; padding: 25px 35px; border-radius: 28px;
+            text-align: center; z-index: 100010; display: none; opacity: 0; transition: all 0.3s ease;
+            box-shadow: 0 0 35px rgba(244, 114, 182, 0.85);
+        }
+        #monitor-photo-popup.show { display: flex; flex-direction: column; align-items: center; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        #monitor-photo-popup img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #38bdf8; margin-top: 10px; }
+
         .hidden { display: none !important; }
-        .attorney-timer-badge { background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #6ee7b7; font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+        .attorney-timer-badge { background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #6ee7b7; font-size: 13px; font-weight: 800; padding: 3px 10px; border-radius: 12px; margin-left: auto; }
     </style>
 </head>
 <body>
@@ -265,18 +278,27 @@
     <div class="heaven-hell-emoji emoji-4">👹</div>
     <div class="heaven-hell-emoji emoji-5">⚡</div>
     <div class="heaven-hell-emoji emoji-6">🕊️</div>
-    <div class="heaven-hell-emoji emoji-7">🔱</div>
-    <div class="heaven-hell-emoji emoji-8">✨</div>
 
     <!-- Profile Photo sa KANAN -->
     <div class="side-profile-container" id="profile-container">
         <img src="my-photo.png" alt="Profile Right" class="side-profile-img">
     </div>
 
+    <!-- Left Photo sa labas sa kaliwa -->
+    <div class="yellow-circle-photo-wrapper" id="left-photo-box">
+        <img src="left-photo.png" alt="Left Photo" class="yellow-circle-photo-img">
+    </div>
+
     <!-- QR Code Wrapper -->
     <div class="qr-code-wrapper" id="qr-wrapper">
         <div id="qrcode"></div>
         <p>📱 SCAN TO JOIN</p>
+    </div>
+
+    <!-- 3-Second Monitor Participant Photo Popup -->
+    <div id="monitor-photo-popup">
+        <h2 id="popup-soul-name" style="color: #f3e8ff; margin: 0; font-size: 22px; text-shadow: 0 0 10px #f472b6;">✨ Participant Joined! ✨</h2>
+        <img id="popup-soul-img" src="" alt="Participant Photo">
     </div>
 
     <div id="camera-modal">
@@ -315,11 +337,6 @@
     <!-- Main Container -->
     <div class="container" id="main-container">
         <div id="role-select">
-            <!-- Pinalaking left-photo sa kaliwang pwesto -->
-            <div class="yellow-circle-photo-wrapper" id="left-photo-box">
-                <img src="left-photo.png" alt="Left Photo" class="yellow-circle-photo-img">
-            </div>
-
             <div><img src="logo.png" alt="Logo" class="app-logo"></div>
             <h1 class="animated-header-title">☁️ THEOLOGY 5 GROUP 1 QUICK ACTIVITY 🔥</h1>
             <p style="text-align:center; color: #e9d5ff; font-weight:600; margin: 2px 0;">Select your mode to begin:</p>
@@ -340,20 +357,21 @@
                     <div class="header-bar">
                         <span>📋 Scoreboard</span>
                         <div>
-                            <button class="btn" style="padding: 5px 10px;" onclick="startTimer()">Start Quiz</button>
-                            <button class="btn" style="background:#f59e0b; padding: 5px 10px;" onclick="forceTimeUp()">Time's Up</button>
-                            <button class="btn" style="background:var(--danger); padding: 5px 10px;" onclick="resetGame()">Reset</button>
+                            <button class="btn" style="padding: 6px 12px;" onclick="startTimer()">Start Quiz</button>
+                            <button class="btn" style="background:#f59e0b; padding: 6px 12px;" onclick="forceTimeUp()">Time's Up</button>
+                            <button class="btn" style="background:var(--danger); padding: 6px 12px;" onclick="resetGame()">Reset</button>
                         </div>
                     </div>
                     <div class="bar-chart-container" id="bar-chart"></div>
                 </div>
                 <div class="judge-right-box">
-                    <div class="animated-rank-title" style="color:#f472b6; font-weight:900;">👑 Heaven Standings ☁️</div>
+                    <div class="animated-rank-title" style="color:#f472b6; font-weight:900; font-size: 18px;">👑 Heaven Standings ☁️</div>
                     <div class="podium-area" id="podium-display"></div>
                 </div>
             </div>
 
-            <div id="review-section" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 18px; border-radius: 18px; display: none; width: 100%; box-sizing: border-box;">
+            <!-- Scrollable Review Area sa Monitor Screen -->
+            <div id="review-section" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 18px; border-radius: 18px; display: none; width: 100%; max-height: 250px; overflow-y: auto; box-sizing: border-box;">
                 <h3 style="color: #c084fc; text-align: center; margin-top:0;">📜 Detailed Review & Explanations</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 10px;">
                     <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q1: Early Christian Mission</p><p style="font-size:11.5px; margin:0;">Jesus directed His initial mission to Israel[cite: 1].</p></div>
@@ -499,11 +517,11 @@
         const socket = io();
         let myGroup = null;
         let isGameStarted = false;
+        let isTeacher = false;
         let answeredQuestions = {};
         let latestGroupScores = { 'Soul 1': 0, 'Soul 2': 0, 'Soul 3': 0, 'Soul 4': 0 };
-        let groupTimers = { 'Soul 1': 90, 'Soul 2': 90, 'Soul 3': 90, 'Soul 4': 90 };
+        let globalTimer = 90; // Iisang Real-time Global Timer (1:30)
         let attorneyPhotos = { 'Soul 1': '', 'Soul 2': '', 'Soul 3': '', 'Soul 4': '' };
-        let groupCompletedStatus = { 'Soul 1': false, 'Soul 2': false, 'Soul 3': false, 'Soul 4': false };
         let capturedDataUrl = '';
         let mediaStream = null;
 
@@ -553,6 +571,7 @@
         function verifyJudgePassword() {
             const pass = document.getElementById('judge-pass-input').value;
             if (pass === "Quiz" || pass === "admin") {
+                isTeacher = true;
                 document.getElementById('password-modal').style.display = 'none';
                 document.getElementById('role-select').classList.add('hidden');
                 document.getElementById('teacher-view').classList.remove('hidden');
@@ -616,15 +635,27 @@
         socket.on('answerFeedback', ({ isCorrect }) => {
             const popup = document.getElementById('feedback-popup');
             popup.className = isCorrect ? "feedback-correct" : "feedback-wrong";
-            popup.innerHTML = isCorrect ? "✔ CORRECT! (+5s Bonus)" : "✖ INCORRECT!";
+            popup.innerHTML = isCorrect ? "✔ CORRECT!" : "✖ INCORRECT!";
             popup.style.display = "block";
             setTimeout(() => { popup.style.display = "none"; }, 1500);
         });
 
-        socket.on('updateState', ({ groupScores, photos, completedStatus }) => {
+        /* 3-Second Photo Popup sa Monitor Screen kapag may nag Join Now */
+        socket.on('newParticipantJoined', ({ groupName, photo }) => {
+            if (isTeacher && photo) {
+                const popup = document.getElementById('monitor-photo-popup');
+                document.getElementById('popup-soul-name').innerText = `✨ ${groupName} Joined! ✨`;
+                document.getElementById('popup-soul-img').src = photo;
+                popup.classList.add('show');
+                setTimeout(() => {
+                    popup.classList.remove('show');
+                }, 3000);
+            }
+        });
+
+        socket.on('updateState', ({ groupScores, photos }) => {
             latestGroupScores = groupScores;
             if (photos) attorneyPhotos = photos;
-            if (completedStatus) groupCompletedStatus = completedStatus;
             renderScoreboardAndPodium();
             if (myGroup && groupScores[myGroup] !== undefined) {
                 document.getElementById('group-score-display').innerText = `Score: ${groupScores[myGroup]} / 10`;
@@ -634,11 +665,11 @@
         function renderScoreboardAndPodium() {
             const sortedGroups = Object.entries(latestGroupScores).sort((a, b) => b[1] - a[1]);
             let chartHTML = '';
+            let timeText = `${Math.floor(globalTimer/60).toString().padStart(2,'0')}:${(globalTimer%60).toString().padStart(2,'0')}`;
+
             sortedGroups.forEach(([group, score]) => {
                 let percentage = (score / 10) * 100;
                 let photoSrc = attorneyPhotos[group] || 'logo.png';
-                let tSeconds = groupTimers[group] !== undefined ? groupTimers[group] : 90;
-                let timeText = `${Math.floor(tSeconds/60).toString().padStart(2,'0')}:${(tSeconds%60).toString().padStart(2,'0')}`;
                 chartHTML += `
                     <div class="bar-row">
                         <img src="${photoSrc}" class="attorney-avatar-mini" />
@@ -657,22 +688,23 @@
                 let photoSrc = attorneyPhotos[group] || 'logo.png';
                 podiumHTML += `
                     <div class="podium-col">
-                        <div style="font-size:11px; font-weight:800; color:#fff; background:linear-gradient(135deg,#a855f7,#7c3aed); padding:2px 8px; border-radius:10px; margin-bottom:6px;">Top ${idx + 1}</div>
+                        <div style="font-size:12px; font-weight:800; color:#fff; background:linear-gradient(135deg,#a855f7,#7c3aed); padding:3px 10px; border-radius:12px; margin-bottom:6px;">Top ${idx + 1}</div>
                         <div class="rank-bar-track"><div class="rank-bar-fill" style="height: ${heightPercent}%; background: #a855f7;"></div></div>
                         <div class="glowing-frame"><img src="${photoSrc}" /></div>
-                        <div style="font-size:12px; font-weight:800; margin-top:5px; color:#f3e8ff;">${group}</div>
+                        <div style="font-size:13px; font-weight:800; margin-top:6px; color:#f3e8ff;">${group}</div>
                     </div>
                 `;
             });
             document.getElementById('podium-display').innerHTML = podiumHTML;
         }
 
-        socket.on('timerUpdate', (data) => {
-            if (typeof data === 'object') groupTimers = data;
-            let myTimer = myGroup && groupTimers[myGroup] !== undefined ? groupTimers[myGroup] : 90;
-            let timeStr = `${Math.floor(myTimer/60).toString().padStart(2,'0')}:${(myTimer%60).toString().padStart(2,'0')}`;
+        /* Real-time Synchronized Timer */
+        socket.on('timerUpdate', (timeSec) => {
+            globalTimer = typeof timeSec === 'number' ? timeSec : (timeSec.global || 90);
+            let timeStr = `${Math.floor(globalTimer/60).toString().padStart(2,'0')}:${(globalTimer%60).toString().padStart(2,'0')}`;
             document.getElementById('student-timer').innerText = `Time Left: ${timeStr}`;
             document.getElementById('floating-timer-text').innerText = timeStr;
+            renderScoreboardAndPodium();
         });
 
         socket.on('timeUp', () => {
