@@ -50,6 +50,13 @@
             100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7)); }
         }
 
+        /* Animation para sa bagong larawan sa kaliwa */
+        @keyframes leftPhotoFloatingGlow {
+            0% { transform: translateY(0px) rotate(-1deg); filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8)) drop-shadow(0 0 25px rgba(56, 189, 248, 0.6)); }
+            50% { transform: translateY(-8px) rotate(1deg); filter: drop-shadow(0 0 25px rgba(244, 114, 182, 0.95)) drop-shadow(0 0 35px rgba(168, 85, 247, 0.8)); }
+            100% { transform: translateY(0px) rotate(-1deg); filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8)) drop-shadow(0 0 25px rgba(56, 189, 248, 0.6)); }
+        }
+
         @keyframes pulseGlowEffect {
             0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
             50% { box-shadow: 0 0 25px rgba(244, 114, 182, 0.7), inset 0 0 12px rgba(56, 189, 248, 0.4); }
@@ -86,10 +93,32 @@
         .emoji-7 { top: 70%; left: 6%; animation-delay: 3s; font-size: 26px; }
         .emoji-8 { top: 18%; left: 48%; animation-delay: 1.2s; font-size: 24px; }
 
+        /* Profile Photo sa KANAN */
         .side-profile-container {
             position: fixed; right: 0; bottom: 0; width: 280px; height: 70vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
         }
         .side-profile-img { width: 100%; height: 100%; object-fit: contain; object-position: bottom right; }
+
+        /* Bagong Pwesto ng Larawan sa loob ng Dilaw na Bilog (Kaliwa) */
+        .yellow-circle-photo-wrapper {
+            position: absolute;
+            top: 28%;
+            left: 2.5%;
+            width: 140px;
+            height: 140px;
+            z-index: 6;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: leftPhotoFloatingGlow 4s infinite ease-in-out;
+        }
+        .yellow-circle-photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 20px;
+        }
 
         .qr-code-wrapper {
             position: fixed; z-index: 10; background: rgba(30, 41, 59, 0.88); border: 2px solid rgba(192, 132, 252, 0.7); padding: 6px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; 
@@ -99,7 +128,7 @@
         .qr-code-wrapper p { margin: 2px 0 0 0; font-size: 9px; font-weight: bold; color: #f3e8ff; }
         #qrcode { padding: 3px; background: #ffffff; border-radius: 6px; }
 
-        /* Main Container: May saktong 14px margin-bottom sa Servant Message Box para malinis at hindi masyadong malayo */
+        /* Main Container */
         .container { 
             position: relative; z-index: 3; max-width: 920px; width: 100%; 
             margin: 0 auto 14px auto; 
@@ -124,7 +153,7 @@
         }
 
         #role-select {
-            height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center;
+            height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center; position: relative;
         }
 
         .judge-main-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; align-items: stretch; width: 100%; }
@@ -159,7 +188,7 @@
             margin: 4px auto !important;
         }
 
-        /* Soul 1-4 Buttons: Pinataas at ginawang mas matangkad ang height */
+        /* Soul 1-4 Buttons */
         .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 12px; margin-top: 4px; }
         .attorney-buttons-container .group-btn { 
             width: 100%; max-width: 300px; padding: 24px 20px; min-height: 75px; 
@@ -233,9 +262,9 @@
     <div class="heaven-hell-emoji emoji-7">🔱</div>
     <div class="heaven-hell-emoji emoji-8">✨</div>
 
-    <!-- Profile Photo -->
+    <!-- Profile Photo sa KANAN -->
     <div class="side-profile-container" id="profile-container">
-        <img src="my-photo.png" alt="Profile" class="side-profile-img">
+        <img src="my-photo.png" alt="Profile Right" class="side-profile-img">
     </div>
 
     <!-- QR Code Wrapper -->
@@ -280,6 +309,11 @@
     <!-- Main Container -->
     <div class="container" id="main-container">
         <div id="role-select">
+            <!-- Larawan sa loob ng dilaw na bilog (kaliwang pwesto) -->
+            <div class="yellow-circle-photo-wrapper" id="left-photo-box">
+                <img src="left-photo.png" alt="Left Photo" class="yellow-circle-photo-img">
+            </div>
+
             <div><img src="logo.png" alt="Logo" class="app-logo"></div>
             <h1 class="animated-header-title">☁️ THEOLOGY 5 GROUP 1 QUICK ACTIVITY 🔥</h1>
             <p style="text-align:center; color: #e9d5ff; font-weight:600; margin: 2px 0;">Select your mode to begin:</p>
@@ -476,6 +510,7 @@
 
         function hideFirstPageElements() {
             document.getElementById('profile-container').style.display = 'none';
+            document.getElementById('left-photo-box').style.display = 'none';
             document.getElementById('qr-wrapper').style.display = 'none';
             document.getElementById('servant-box').style.display = 'none';
         }
