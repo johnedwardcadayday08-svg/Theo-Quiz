@@ -1,124 +1,112 @@
 const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const path = require('path');
-
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+const path = require('path');
 
 app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 let isGameStarted = false;
+let globalTimer = 90; // 1 minute 30 seconds
 let timerInterval = null;
-let groupScores = { 'Soul 1': 0, 'Soul 2': 0, 'Soul 3': 0, 'Soul 4': 0 };
-let groupTimers = { 'Soul 1': 90, 'Soul 2': 90, 'Soul 3': 90, 'Soul 4': 90 };
-let attorneyPhotos = { 'Soul 1': '', 'Soul 2': '', 'Soul 3': '', 'Soul 4': '' };
-let groupCompletedStatus = { 'Soul 1': false, 'Soul 2': false, 'Soul 3': false, 'Soul 4': false };
-let popupQueue = [];
 
+let groupScores = {
+    'Soul 1': 0,
+    'Soul 2': 0,
+    'Soul 3': 0,
+    'Soul 4': 0
+};
+
+let attorneyPhotos = {
+    'Soul 1': '',
+    'Soul 2': '',
+    'Soul 3': '',
+    'Soul 4': ''
+};
+
+// Tama at nakatakdang sagot para sa 10 tanong
 const correctAnswers = {
-    q1: 'B', // Israel
-    q2: 'B', // Greece
-    q3: 'A', // Augustine
-    q4: 'C', // St. Patrick
-    q5: 'A', // Top-down ruler conversions
-    q6: 'B', // Franciscans
-    q7: 'C', // William Carey
-    q8: 'A', // Hudson Taylor
-    q9: 'C', // Global South
-    q10: 'B' // Polycentrism
+    q1: 'B', q2: 'B', q3: 'A', q4: 'C', q5: 'A',
+    q6: 'B', q7: 'C', q8: 'A', q9: 'C', q10: 'B'
 };
 
 io.on('connection', (socket) => {
+    // Ipadala ang kasalukuyang estado ng laro sa bagong konektadong user
     socket.emit('gameState', { isGameStarted });
-    socket.emit('updateState', { groupScores, photos: attorneyPhotos, completedStatus: groupCompletedStatus });
-    socket.emit('timerUpdate', groupTimers);
+    socket.emit('updateState', { groupScores, photos: attorneyPhotos });
+    socket.emit('timerUpdate', globalTimer);
 
+    // Kapag pumasok at nag-picture ang Soul participant
     socket.on('registerAttorneyPhoto', ({ groupName, photo }) => {
         if (groupName && photo) {
             attorneyPhotos[groupName] = photo;
-            popupQueue.push({ groupName, photo });
-            io.emit('updateState', { groupScores, photos: attorneyPhotos, completedStatus: groupCompletedStatus });
+            io.emit('updateState', { groupScores, photos: attorneyPhotos });
+            // I-broadcast sa monitor screen para sa 3-second popup
+            io.emit('newParticipantJoined', { groupName, photo });
         }
     });
 
+    // Kapag pinindot ng Teacher / Facilitator ang "Start Quiz"
     socket.on('startTimer', () => {
-        if (!isGameStarted) {
-            isGameStarted = true;
-            groupTimers = { 'Soul 1': 90, 'Soul 2': 90, 'Soul 3': 90, 'Soul 4': 90 };
-            groupCompletedStatus = { 'Soul 1': false, 'Soul 2': false, 'Soul 3': false, 'Soul 4': false };
-            
-            io.emit('gameState', { isGameStarted });
-            io.emit('timerUpdate', groupTimers);
-            io.emit('updateState', { groupScores, photos: attorneyPhotos, completedStatus: groupCompletedStatus });
+        if (isGameStarted) return; // Iwasan ang paulit-ulit na pag-start
 
-            if (timerInterval) clearInterval(timerInterval);
+        isGameStarted = true;
+        globalTimer = 90; // I-reset sa 1:30
 
-            timerInterval = setInterval(() => {
-                let allZero = true;
-                Object.keys(groupTimers).forEach(group => {
-                    if (groupTimers[group] > 0) {
-                        groupTimers[group] -= 1;
-                        allZero = false;
-                    }
-                });
-                io.emit('timerUpdate', groupTimers);
+        io.emit('gameState', { isGameStarted: true });
+        io.emit('timerUpdate', globalTimer);
 
-                if (allZero) {
-                    clearInterval(timerInterval);
-                    isGameStarted = false;
-                    io.emit('timeUp');
-                }
-            }, 1000);
-        }
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if (globalTimer > 0) {
+                globalTimer--;
+                io.emit('timerUpdate', globalTimer);
+            } else {
+                clearInterval(timerInterval);
+                isGameStarted = false;
+                io.emit('gameState', { isGameStarted: false });
+                io.emit('timeUp');
+            }
+        }, 1000);
     });
 
+    // Kapag pinindot ang "Time's Up"
     socket.on('forceTimeUp', () => {
-        if (timerInterval) clearInterval(timerInterval);
+        clearInterval(timerInterval);
+        globalTimer = 0;
         isGameStarted = false;
+        io.emit('timerUpdate', 0);
+        io.emit('gameState', { isGameStarted: false });
         io.emit('timeUp');
     });
 
-    socket.on('submitAnswer', ({ groupName, questionId, answer, answeredCount }) => {
-        if (!isGameStarted) return;
-        const isCorrect = (answer === correctAnswers[questionId]);
-
-        if (isCorrect) {
-            groupScores[groupName] = (groupScores[groupName] || 0) + 1;
-            groupTimers[groupName] = (groupTimers[groupName] || 90) + 5; // +5 seconds bonus time
-        }
-
-        if (answeredCount >= 10) {
-            groupCompletedStatus[groupName] = true;
-            io.emit('groupFinished', { groupName });
-        }
-
-        socket.emit('answerFeedback', { isCorrect, questionId, answer });
-        io.emit('updateState', { groupScores, photos: attorneyPhotos, completedStatus: groupCompletedStatus });
-        io.emit('timerUpdate', groupTimers);
+    // Kapag pinindot ang "Reset"
+    socket.on('resetGame', () => {
+        clearInterval(timerInterval);
+        isGameStarted = false;
+        globalTimer = 90;
+        groupScores = { 'Soul 1': 0, 'Soul 2': 0, 'Soul 3': 0, 'Soul 4': 0 };
+        io.emit('gameState', { isGameStarted: false });
+        io.emit('timerUpdate', globalTimer);
+        io.emit('updateState', { groupScores, photos: attorneyPhotos });
+        io.emit('closeWinnerModal');
     });
 
-    socket.on('resetGame', () => {
-        if (timerInterval) clearInterval(timerInterval);
-        isGameStarted = false;
-        groupScores = { 'Soul 1': 0, 'Soul 2': 0, 'Soul 3': 0, 'Soul 4': 0 };
-        groupTimers = { 'Soul 1': 90, 'Soul 2': 90, 'Soul 3': 90, 'Soul 4': 90 };
-        groupCompletedStatus = { 'Soul 1': false, 'Soul 2': false, 'Soul 3': false, 'Soul 4': false };
-        attorneyPhotos = { 'Soul 1': '', 'Soul 2': '', 'Soul 3': '', 'Soul 4': '' };
-        popupQueue = [];
+    // Kapag nag-submit ng sagot ang participant
+    socket.on('submitAnswer', ({ groupName, questionId, answer }) => {
+        if (!isGameStarted) return;
 
-        io.emit('gameState', { isGameStarted });
-        io.emit('timerUpdate', groupTimers);
-        io.emit('updateState', { groupScores, photos: attorneyPhotos, completedStatus: groupCompletedStatus });
+        const isCorrect = correctAnswers[questionId] === answer;
+        if (isCorrect) {
+            groupScores[groupName] = (groupScores[groupName] || 0) + 1;
+        }
+
+        socket.emit('answerFeedback', { isCorrect });
+        io.emit('updateState', { groupScores, photos: attorneyPhotos });
     });
 });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
+http.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
