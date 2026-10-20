@@ -175,7 +175,6 @@
         .glowing-frame { width: 72px; height: 72px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 8px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .glowing-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #1e293b; }
 
-        /* Malinaw at High-Contrast na Heaven Standings Title */
         .animated-rank-title {
             color: #ffffff;
             font-weight: 900;
@@ -285,6 +284,107 @@
         }
 
         .hidden { display: none !important; }
+
+        /* =========================================================
+           MOBILE CELLPHONE VIEW STYLES (@media max-width: 767px)
+           ========================================================= */
+        @media (max-width: 767px) {
+            /* 1. Alisin ang QR Code sa Mobile */
+            .qr-code-wrapper, #qr-wrapper {
+                display: none !important;
+            }
+
+            /* 2. Pinaliit at inayos ang My-Photo sa ibabang kanan */
+            .side-profile-container {
+                width: 130px !important;
+                height: 32vh !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                z-index: 1 !important;
+                opacity: 0.85;
+            }
+
+            /* 3. Inilipat sa pinaka-gilid sa kaliwa ang Left Photo at pinaliliit */
+            .yellow-circle-photo-wrapper {
+                top: 50px !important;
+                left: 2px !important;
+                width: 90px !important;
+                height: 90px !important;
+                z-index: 2 !important;
+            }
+
+            /* 4. Well-proportioned Main Container */
+            .container {
+                width: 96% !important;
+                max-width: 100% !important;
+                padding: 12px 14px !important;
+                margin-top: 45px !important;
+                height: auto !important;
+                max-height: 86vh !important;
+            }
+
+            /* 5. Inayos ang Title at Logo sa Mobile */
+            .app-logo {
+                width: 55px !important;
+                height: 55px !important;
+                margin-top: 2px !important;
+            }
+
+            .animated-header-title {
+                font-size: 16px !important;
+                line-height: 1.25 !important;
+                margin: 4px 0 !important;
+                padding: 0 5px !important;
+            }
+
+            /* 6. Inayos ang God's Monitor & Soul Buttons para malinaw ang Teksto */
+            .animated-main-btn {
+                padding: 10px 16px !important;
+                font-size: 13px !important;
+                width: 100% !important;
+                max-width: 270px !important;
+                z-index: 10 !important;
+                position: relative !important;
+            }
+
+            .attorney-buttons-container {
+                flex-direction: column !important;
+                gap: 8px !important;
+                width: 100% !important;
+            }
+
+            .attorney-buttons-container .group-btn {
+                width: 100% !important;
+                max-width: 270px !important;
+                min-height: 46px !important;
+                padding: 8px 14px !important;
+                font-size: 16px !important;
+                z-index: 10 !important;
+                position: relative !important;
+            }
+
+            /* 7. Servant Message Box sa Mobile */
+            .servant-message-box {
+                width: 96% !important;
+                padding: 8px 12px !important;
+                margin-top: 6px !important;
+            }
+
+            .servant-message-box p {
+                font-size: 11px !important;
+            }
+
+            /* 8. Top Controls */
+            .top-controls {
+                top: 6px !important;
+                right: 8px !important;
+            }
+
+            .control-btn {
+                padding: 4px 10px !important;
+                font-size: 10.5px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -392,16 +492,16 @@
             <div id="review-section" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 18px; border-radius: 18px; display: none; width: 100%; max-height: 250px; overflow-y: auto; box-sizing: border-box;">
                 <h3 style="color: #c084fc; text-align: center; margin-top:0;">📜 Detailed Review & Explanations</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 10px;">
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q1: Early Christian Mission</p><p style="font-size:11.5px; margin:0;">Jesus directed His initial mission to Israel[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q2: Paul's Ministry</p><p style="font-size:11.5px; margin:0;">Paul conducted missions primarily in Asia Minor and Greece[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q3: Patristic Period</p><p style="font-size:11.5px; margin:0;">Augustine taught that the church is a mixed body[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q4: Medieval Monasticism</p><p style="font-size:11.5px; margin:0;">St. Patrick established monasteries in Ireland[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q5: Conversion Methods</p><p style="font-size:11.5px; margin:0;">Top-down ruler conversions (Clovis/Charlemagne)[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q6: Mendicant Orders</p><p style="font-size:11.5px; margin:0;">Franciscans preached outside monastery walls[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q7: Modern Missions</p><p style="font-size:11.5px; margin:0;">William Carey launched Baptist Missionary Society[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q8: Voluntary Societies</p><p style="font-size:11.5px; margin:0;">Hudson Taylor founded China Inland Mission[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q9: Global Shift</p><p style="font-size:11.5px; margin:0;">Center of gravity shifted to the Global South[cite: 1].</p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q10: Mission Movement</p><p style="font-size:11.5px; margin:0;">Transformed into global Polycentrism[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q1: Early Christian Mission</p><p style="font-size:11.5px; margin:0;">Jesus directed His initial mission to Israel.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q2: Paul's Ministry</p><p style="font-size:11.5px; margin:0;">Paul conducted missions primarily in Asia Minor and Greece.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q3: Patristic Period</p><p style="font-size:11.5px; margin:0;">Augustine taught that the church is a mixed body.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q4: Medieval Monasticism</p><p style="font-size:11.5px; margin:0;">St. Patrick established monasteries in Ireland.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q5: Conversion Methods</p><p style="font-size:11.5px; margin:0;">Top-down ruler conversions (Clovis/Charlemagne).</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q6: Mendicant Orders</p><p style="font-size:11.5px; margin:0;">Franciscans preached outside monastery walls.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q7: Modern Missions</p><p style="font-size:11.5px; margin:0;">William Carey launched Baptist Missionary Society.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q8: Voluntary Societies</p><p style="font-size:11.5px; margin:0;">Hudson Taylor founded China Inland Mission.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q9: Global Shift</p><p style="font-size:11.5px; margin:0;">Center of gravity shifted to the Global South.</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q10: Mission Movement</p><p style="font-size:11.5px; margin:0;">Transformed into global Polycentrism.</p></div>
                 </div>
             </div>
         </div>
