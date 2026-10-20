@@ -25,15 +25,17 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), 
+            /* Ginawang medyo mas transparent/soft ang background photo sa pamamagitan ng mas malalim na gradient overlay */
+            background: linear-gradient(rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.78)), 
                         url('background.png') no-repeat center center fixed;
             background-size: cover;
             color: var(--text-color);
             margin: 0;
-            padding: 12px;
-            min-height: 100vh;
+            padding: 12px 15px;
+            height: 100vh;
+            max-height: 100vh;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -44,73 +46,83 @@
         * { scrollbar-width: none !important; }
 
         @keyframes floatingGlowAnim {
-            0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); }
-            50% { transform: translateY(-5px) scale(1.02); filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.9)); }
-            100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); }
+            0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7)); }
+            50% { transform: translateY(-6px) scale(1.04); filter: drop-shadow(0 0 22px rgba(244, 114, 182, 0.95)); }
+            100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.7)); }
         }
 
         @keyframes pulseGlowEffect {
             0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(244, 114, 182, 0.8), inset 0 0 15px rgba(56, 189, 248, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(244, 114, 182, 0.7), inset 0 0 12px rgba(56, 189, 248, 0.4); }
             100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
         }
 
         @keyframes buttonBreathAnim {
             0% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
-            50% { transform: scale(1.03); box-shadow: 0 6px 25px rgba(244, 114, 182, 0.8); }
+            50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(244, 114, 182, 0.8); }
             100% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
         }
 
         .top-controls {
-            position: fixed; top: 15px; right: 18px; z-index: 100005; display: flex; gap: 10px; align-items: center;
+            position: fixed; top: 10px; right: 18px; z-index: 100005; display: flex; gap: 8px; align-items: center;
         }
         .control-btn {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(124, 58, 237, 0.85));
-            color: #f3e8ff; border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 8px 16px;
-            font-size: 13px; font-weight: 700; border-radius: 20px; cursor: pointer; backdrop-filter: blur(8px);
+            color: #f3e8ff; border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 6px 14px;
+            font-size: 12px; font-weight: 700; border-radius: 18px; cursor: pointer; backdrop-filter: blur(8px);
             animation: buttonBreathAnim 3s infinite ease-in-out;
         }
         .surrender-btn { background: linear-gradient(135deg, rgba(244, 63, 94, 0.85), rgba(225, 29, 72, 0.85)); }
 
-        .law-bg-element {
-            position: fixed; font-size: 36px; opacity: 0.82; user-select: none; pointer-events: none; z-index: 2;
+        /* Mga nakalutang at nag-gaglow na Heaven & Hell Emojis sa paligid */
+        .heaven-hell-emoji {
+            position: fixed; font-size: 32px; user-select: none; pointer-events: none; z-index: 2;
             animation: floatingGlowAnim 4s infinite ease-in-out;
         }
-        .icon-1 { top: 6%; left: 2%; } .icon-2 { top: 10%; right: 3%; animation-delay: 1s; } .icon-3 { bottom: 22%; left: 3%; animation-delay: 2s; }
+        .emoji-1 { top: 8%; left: 3%; filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.8)); }
+        .emoji-2 { top: 12%; right: 4%; animation-delay: 1s; filter: drop-shadow(0 0 15px rgba(244, 63, 94, 0.9)); font-size: 35px; }
+        .emoji-3 { bottom: 18%; left: 4%; animation-delay: 2s; filter: drop-shadow(0 0 15px rgba(252, 211, 77, 0.9)); }
+        .emoji-4 { bottom: 14%; right: 6%; animation-delay: 1.5s; filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.9)); font-size: 36px; }
+        .emoji-5 { top: 48%; left: 1.5%; animation-delay: 2.5s; font-size: 28px; }
+        .emoji-6 { top: 32%; right: 2.5%; animation-delay: 0.8s; font-size: 30px; }
+        .emoji-7 { top: 70%; left: 8%; animation-delay: 3s; font-size: 28px; }
+        .emoji-8 { top: 22%; left: 48%; animation-delay: 1.2s; font-size: 26px; }
 
-        /* Pinalaki at isinagad sa mismong kanan ang profile picture */
+        /* Profile Photo sa Kanan */
         .side-profile-container {
-            position: fixed; right: 0; bottom: 0; width: 320px; height: 75vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
+            position: fixed; right: 0; bottom: 0; width: 280px; height: 70vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
         }
         .side-profile-img { width: 100%; height: 100%; object-fit: contain; object-position: bottom right; }
 
-        /* Inalis ang QR code pakaliwa sa tapat ng yellow line mark */
+        /* QR Code sakto sa pwesto sa kanan */
         .qr-code-wrapper {
-            position: fixed; z-index: 10; background: rgba(30, 41, 59, 0.85); border: 2px solid rgba(192, 132, 252, 0.7); padding: 10px; border-radius: 18px; display: flex; flex-direction: column; align-items: center; right: 170px; bottom: 42vh;
+            position: fixed; z-index: 10; background: rgba(30, 41, 59, 0.88); border: 2px solid rgba(192, 132, 252, 0.7); padding: 6px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; 
+            top: 75px; right: 75px;
             animation: floatingGlowAnim 5s infinite ease-in-out;
         }
-        .qr-code-wrapper p { margin: 4px 0 0 0; font-size: 11px; font-weight: bold; color: #f3e8ff; }
-        #qrcode { padding: 5px; background: #ffffff; border-radius: 8px; }
+        .qr-code-wrapper p { margin: 2px 0 0 0; font-size: 9px; font-weight: bold; color: #f3e8ff; }
+        #qrcode { padding: 3px; background: #ffffff; border-radius: 6px; }
 
-        /* Pinalawak at idinikit ang main container sa bottom message box */
+        /* Main Container */
         .container { 
-            position: relative; z-index: 3; max-width: 960px; width: 100%; margin: 10px auto 6px auto; 
-            background: var(--card-bg-transparent); padding: 30px 34px 36px 34px; border-radius: 28px; 
+            position: relative; z-index: 3; max-width: 920px; width: 100%; margin: 2px auto; 
+            background: var(--card-bg-transparent); padding: 18px 30px 22px 30px; border-radius: 24px; 
             backdrop-filter: blur(8px); border: 2px solid rgba(192, 132, 252, 0.5); 
             animation: pulseGlowEffect 4s infinite ease-in-out;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
         /* Servant of God Message Box */
         .servant-message-box {
-            position: relative; z-index: 3; max-width: 960px; width: 100%; margin: 0 auto 8px auto;
-            background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(244, 114, 182, 0.65);
-            padding: 12px 20px; border-radius: 20px; text-align: center; backdrop-filter: blur(8px);
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            position: relative; z-index: 3; max-width: 920px; width: 100%; margin: 0 auto;
+            background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(244, 114, 182, 0.65);
+            padding: 9px 18px; border-radius: 16px; text-align: center; backdrop-filter: blur(8px);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
             animation: floatingGlowAnim 4.5s infinite ease-in-out;
         }
         .servant-message-box p {
-            margin: 0; font-size: 14px; font-weight: 700; color: #f3e8ff;
-            text-shadow: 0 0 10px rgba(244, 114, 182, 0.8);
+            margin: 0; font-size: 13px; font-weight: 700; color: #f3e8ff;
+            text-shadow: 0 0 8px rgba(244, 114, 182, 0.8);
             letter-spacing: 0.5px;
         }
 
@@ -125,83 +137,80 @@
         .glowing-frame { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 10px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .glowing-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #1e293b; }
 
-        .app-logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.9); animation: floatingGlowAnim 3.5s infinite ease-in-out; }
+        .app-logo { width: 75px; height: 75px; object-fit: cover; border-radius: 50%; border: 2.5px solid rgba(255, 255, 255, 0.9); animation: floatingGlowAnim 3.5s infinite ease-in-out; margin: 0 auto; display: block; }
         .animated-header-title { 
-            font-size: 26px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 10px 0 6px 0;
-            text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 25px rgba(244, 114, 182, 0.6);
+            font-size: 22px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 6px 0 4px 0;
+            text-shadow: 0 0 12px rgba(168, 85, 247, 0.8), 0 0 20px rgba(244, 114, 182, 0.6);
             animation: floatingGlowAnim 4s infinite ease-in-out;
         }
         
         .btn { 
-            background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 14px 28px; font-size: 16px; border-radius: 16px; cursor: pointer; font-weight: bold; margin: 8px auto; display: inline-block; 
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5);
+            background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 10px 24px; font-size: 14px; border-radius: 14px; cursor: pointer; font-weight: bold; margin: 4px auto; display: inline-block; 
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.5);
             animation: buttonBreathAnim 3s infinite ease-in-out;
         }
         .btn:hover { transform: scale(1.05); }
 
         .animated-main-btn {
-            padding: 16px 38px !important; font-size: 18px !important; border-radius: 18px !important;
+            padding: 12px 30px !important; font-size: 16px !important; border-radius: 16px !important;
             background: linear-gradient(135deg, #c084fc, #7c3aed, #f472b6);
             background-size: 200% 200%;
+            margin: 6px auto !important;
         }
 
-        /* Soul Buttons - Pinalaki ang size para ma-occupy nang maganda ang space */
-        .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 14px; margin-top: 14px; }
-        .attorney-buttons-container .group-btn { width: 100%; max-width: 320px; padding: 18px 24px; color: #ffffff; font-size: 18px; font-weight: 800; border: none; border-radius: 18px; cursor: pointer; animation: buttonBreathAnim 3s infinite ease-in-out; }
+        /* Soul 1-4 Buttons */
+        .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 10px; margin-top: 8px; }
+        .attorney-buttons-container .group-btn { 
+            width: 100%; max-width: 300px; padding: 16px 18px; min-height: 60px; 
+            color: #ffffff; font-size: 18px; font-weight: 800; border: none; border-radius: 16px; 
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            animation: buttonBreathAnim 3s infinite ease-in-out; 
+        }
         .attorney-btn-1 { background: linear-gradient(135deg, #38bdf8, #0284c7) !important; animation-delay: 0s !important; }
         .attorney-btn-2 { background: linear-gradient(135deg, #a855f7, #7c3aed) !important; animation-delay: 0.5s !important; }
         .attorney-btn-3 { background: linear-gradient(135deg, #10b981, #059669) !important; animation-delay: 1s !important; }
         .attorney-btn-4 { background: linear-gradient(135deg, #f43f5e, #be123c) !important; animation-delay: 1.5s !important; }
 
         @media (min-width: 768px) {
-            .attorney-buttons-container { flex-direction: row; justify-content: center; gap: 16px; }
-            .attorney-buttons-container .group-btn { width: auto; flex: 1; max-width: 220px; }
+            .attorney-buttons-container { flex-direction: row; justify-content: center; gap: 14px; }
+            .attorney-buttons-container .group-btn { width: auto; flex: 1; max-width: 200px; }
         }
 
-        .header-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.45); padding: 12px 18px; border-radius: 16px; margin-bottom: 15px; font-weight: bold; color: #f3e8ff; }
-        .bar-chart-container { margin: 10px 0; background: rgba(15, 23, 42, 0.45); padding: 12px; border-radius: 16px; }
-        .bar-row { display: flex; align-items: center; margin: 10px 0; gap: 10px; }
+        .header-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.45); padding: 10px 16px; border-radius: 14px; margin-bottom: 12px; font-weight: bold; color: #f3e8ff; }
+        .bar-chart-container { margin: 8px 0; background: rgba(15, 23, 42, 0.45); padding: 10px; border-radius: 14px; }
+        .bar-row { display: flex; align-items: center; margin: 8px 0; gap: 8px; }
         .bar-label { width: 85px; font-weight: bold; font-size: 13px; color: #f3e8ff; }
-        .bar-track { flex-grow: 1; background: rgba(255, 255, 255, 0.25); height: 24px; border-radius: 9px; overflow: hidden; margin: 0 8px; }
-        .bar-fill { height: 100%; background: linear-gradient(90deg, #c084fc, #a855f7); width: 0%; border-radius: 9px; }
+        .bar-track { flex-grow: 1; background: rgba(255, 255, 255, 0.25); height: 22px; border-radius: 8px; overflow: hidden; margin: 0 8px; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, #c084fc, #a855f7); width: 0%; border-radius: 8px; }
         .bar-score { font-weight: bold; width: 40px; text-align: right; color: #f3e8ff; }
-        .attorney-avatar-mini { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #c084fc; }
+        .attorney-avatar-mini { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid #c084fc; }
 
-        /* Quiz Question Cards Adjustment para sa PC at Cellphone */
-        .question-card { background: rgba(15, 23, 42, 0.55); border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 22px; border-radius: 18px; margin-bottom: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .question-card p { font-size: 16px; line-height: 1.5; color: #ffffff; margin-top: 0; margin-bottom: 14px; }
-        .options { display: flex; flex-direction: column; gap: 10px; }
-        .options label { display: flex; align-items: center; padding: 12px 16px; background: rgba(14, 116, 144, 0.3); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 12px; cursor: pointer; font-size: 15px; color: #ffffff; font-weight: 600; transition: all 0.2s ease; }
+        .question-card { background: rgba(15, 23, 42, 0.55); border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 16px 20px; border-radius: 16px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .question-card p { font-size: 15px; line-height: 1.4; color: #ffffff; margin-top: 0; margin-bottom: 10px; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        .options label { display: flex; align-items: center; padding: 10px 14px; background: rgba(14, 116, 144, 0.3); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 10px; cursor: pointer; font-size: 14px; color: #ffffff; font-weight: 600; transition: all 0.2s ease; }
         .options label:hover { background: rgba(14, 116, 144, 0.5); border-color: #38bdf8; }
-        .options label input { margin-right: 12px; transform: scale(1.3); accent-color: #38bdf8; }
+        .options label input { margin-right: 10px; transform: scale(1.2); accent-color: #38bdf8; }
 
-        @media (max-width: 600px) {
-            .question-card p { font-size: 15px; }
-            .options label { font-size: 14px; padding: 10px 12px; }
-            .animated-header-title { font-size: 20px; }
-            .side-profile-container { width: 220px; height: 50vh; }
-            .qr-code-wrapper { right: 15px; bottom: 35vh; }
-        }
-
-        #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 20px; padding: 22px; text-align: center; font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 20px; animation: floatingGlowAnim 3s infinite ease-in-out; }
+        #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 16px; padding: 18px; text-align: center; font-size: 16px; font-weight: 900; color: #ffffff; margin-bottom: 16px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .option-correct { background: rgba(16, 185, 129, 0.45) !important; border-color: #10b981 !important; }
         .option-wrong { background: rgba(244, 63, 94, 0.45) !important; border-color: #f43f5e !important; }
 
-        #floating-timer-badge { position: fixed; top: 22px; left: 25px; width: 55px; height: 55px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; z-index: 10006; animation: floatingGlowAnim 2s infinite ease-in-out; }
-        #feedback-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px 40px; border-radius: 20px; font-size: 24px; font-weight: 900; color: white; z-index: 10005; display: none; text-align: center; }
+        #floating-timer-badge { position: fixed; top: 18px; left: 20px; width: 50px; height: 50px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; z-index: 10006; animation: floatingGlowAnim 2s infinite ease-in-out; }
+        #feedback-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 18px 36px; border-radius: 18px; font-size: 22px; font-weight: 900; color: white; z-index: 10005; display: none; text-align: center; }
         .feedback-correct { background: #10b981; } .feedback-wrong { background: #f43f5e; }
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.75); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
-        .modal-card { background: rgba(30, 41, 59, 0.95); border-radius: 22px; padding: 30px; max-width: 400px; width: 100%; text-align: center; }
-        .modal-input { width: 100%; max-width: 300px; padding: 12px; margin: 16px auto; background: rgba(255, 255, 255, 0.18); border-radius: 13px; color: #ffffff; font-size: 17px; text-align: center; display: block; }
+        .modal-card { background: rgba(30, 41, 59, 0.95); border-radius: 20px; padding: 25px; max-width: 380px; width: 100%; text-align: center; }
+        .modal-input { width: 100%; max-width: 280px; padding: 10px; margin: 14px auto; background: rgba(255, 255, 255, 0.18); border-radius: 12px; color: #ffffff; font-size: 16px; text-align: center; display: block; }
         
         #camera-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.88); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 10004; padding: 20px; }
-        .camera-box { background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)); border: 2.5px solid #c084fc; border-radius: 30px; padding: 28px 22px; max-width: 380px; width: 100%; text-align: center; }
-        #webcam-video { width: 100%; max-width: 240px; height: 180px; border-radius: 20px; border: 3px solid #f472b6; object-fit: cover; margin: 12px auto; display: block; transform: scaleX(-1); }
-        #captured-preview { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3.5px solid #38bdf8; margin: 12px auto; transform: scaleX(-1); }
+        .camera-box { background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)); border: 2.5px solid #c084fc; border-radius: 26px; padding: 24px 20px; max-width: 350px; width: 100%; text-align: center; }
+        #webcam-video { width: 100%; max-width: 220px; height: 160px; border-radius: 18px; border: 3px solid #f472b6; object-fit: cover; margin: 10px auto; display: block; transform: scaleX(-1); }
+        #captured-preview { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #38bdf8; margin: 10px auto; transform: scaleX(-1); }
 
         .hidden { display: none !important; }
-        .attorney-timer-badge { background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #6ee7b7; font-size: 13px; font-weight: 800; padding: 3px 9px; border-radius: 12px; margin-left: auto; }
+        .attorney-timer-badge { background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; color: #6ee7b7; font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
     </style>
 </head>
 <body>
@@ -213,16 +222,22 @@
 
     <div id="floating-timer-badge"><span id="floating-timer-text">01:30</span></div>
 
-    <div class="law-bg-element icon-1">☁️</div>
-    <div class="law-bg-element icon-2">🔥</div>
-    <div class="law-bg-element icon-3">👼</div>
+    <!-- Mga karagdagang nag-gaglow na Heaven & Hell Emojis -->
+    <div class="heaven-hell-emoji emoji-1">☁️</div>
+    <div class="heaven-hell-emoji emoji-2">🔥</div>
+    <div class="heaven-hell-emoji emoji-3">👼</div>
+    <div class="heaven-hell-emoji emoji-4">👹</div>
+    <div class="heaven-hell-emoji emoji-5">⚡</div>
+    <div class="heaven-hell-emoji emoji-6">🕊️</div>
+    <div class="heaven-hell-emoji emoji-7">🔱</div>
+    <div class="heaven-hell-emoji emoji-8">✨</div>
 
-    <!-- Pinalaking Profile Photo (First Page Only) -->
+    <!-- Profile Photo -->
     <div class="side-profile-container" id="profile-container">
         <img src="my-photo.png" alt="Profile" class="side-profile-img">
     </div>
 
-    <!-- QR Code Wrapper (First Page Only) -->
+    <!-- QR Code Wrapper -->
     <div class="qr-code-wrapper" id="qr-wrapper">
         <div id="qrcode"></div>
         <p>📱 SCAN TO JOIN</p>
@@ -230,23 +245,23 @@
 
     <div id="camera-modal">
         <div class="camera-box">
-            <h3 style="color: #f472b6;">Smile for the Soul Camera! ✨📸</h3>
+            <h3 style="color: #f472b6; margin-top:0;">Smile for the Soul Camera! ✨📸</h3>
             <video id="webcam-video" autoplay playsinline></video>
             <canvas id="webcam-canvas" class="hidden"></canvas>
             <img id="captured-preview" class="hidden" />
-            <div id="camera-controls" style="margin-top:10px;">
+            <div id="camera-controls" style="margin-top:8px;">
                 <button class="btn" onclick="capturePhoto()">Capture Photo 📷</button>
             </div>
-            <div id="join-now-container" class="hidden" style="margin-top:10px;">
+            <div id="join-now-container" class="hidden" style="margin-top:8px;">
                 <button class="btn" style="background: #10b981; width:100%;" onclick="confirmJoinNow()">Join Now 🚀</button>
             </div>
         </div>
     </div>
 
     <div class="winner-modal-overlay" id="winner-modal" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15, 23, 42, 0.85); display:none; justify-content:center; align-items:center; z-index:10005; padding:15px;">
-        <div class="winner-modal-card" style="background:linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)); border-radius:28px; padding:24px; max-width:650px; width:100%; text-align:center; max-height:92vh; overflow-y:auto;">
-            <div style="font-size: 26px; margin-bottom: 5px; color:#fff;">☁️🔥 Judgment Results 🔥☁️</div>
-            <div class="results-boxes-container" id="attorneys-results-list" style="display:flex; flex-direction:column; gap:12px; margin:16px 0;"></div>
+        <div class="winner-modal-card" style="background:linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)); border-radius:26px; padding:22px; max-width:600px; width:100%; text-align:center; max-height:90vh; overflow-y:auto;">
+            <div style="font-size: 24px; margin-bottom: 4px; color:#fff;">☁️🔥 Judgment Results 🔥☁️</div>
+            <div class="results-boxes-container" id="attorneys-results-list" style="display:flex; flex-direction:column; gap:10px; margin:14px 0;"></div>
             <button class="btn" style="width: 100%;" onclick="closeWinnerModal()">View Explanations</button>
         </div>
     </div>
@@ -264,11 +279,11 @@
     <!-- Main Container -->
     <div class="container" id="main-container">
         <div id="role-select">
-            <div style="text-align:center;"><img src="logo.png" alt="Logo" class="app-logo"></div>
+            <div><img src="logo.png" alt="Logo" class="app-logo"></div>
             <h1 class="animated-header-title">☁️ THEOLOGY 5 GROUP 1 QUICK ACTIVITY 🔥</h1>
-            <p style="text-align:center; color: #e9d5ff; font-weight:600;">Select your mode to begin:</p>
-            <button class="btn animated-main-btn" style="margin-bottom: 12px; display:block; margin-left:auto; margin-right:auto;" onclick="selectRole('teacher')">☁️ God's Monitor to Earth 🌍</button>
-            <h3 style="text-align:center; color: #f472b6; margin-top: 18px;">Join as Soul:</h3>
+            <p style="text-align:center; color: #e9d5ff; font-weight:600; margin: 4px 0 8px 0;">Select your mode to begin:</p>
+            <button class="btn animated-main-btn" style="margin-bottom: 8px; display:block; margin-left:auto; margin-right:auto;" onclick="selectRole('teacher')">☁️ God's Monitor to Earth 🌍</button>
+            <h3 style="text-align:center; color: #f472b6; margin: 8px 0 4px 0;">Join as Soul:</h3>
             <div class="attorney-buttons-container">
                 <button class="group-btn attorney-btn-1" onclick="selectGroup('Soul 1')">Soul 1</button>
                 <button class="group-btn attorney-btn-2" onclick="selectGroup('Soul 2')">Soul 2</button>
@@ -284,9 +299,9 @@
                     <div class="header-bar">
                         <span>📋 Scoreboard</span>
                         <div>
-                            <button class="btn" style="padding: 6px 12px;" onclick="startTimer()">Start Quiz</button>
-                            <button class="btn" style="background:#f59e0b; padding: 6px 12px;" onclick="forceTimeUp()">Time's Up</button>
-                            <button class="btn" style="background:var(--danger); padding: 6px 12px;" onclick="resetGame()">Reset</button>
+                            <button class="btn" style="padding: 5px 10px;" onclick="startTimer()">Start Quiz</button>
+                            <button class="btn" style="background:#f59e0b; padding: 5px 10px;" onclick="forceTimeUp()">Time's Up</button>
+                            <button class="btn" style="background:var(--danger); padding: 5px 10px;" onclick="resetGame()">Reset</button>
                         </div>
                     </div>
                     <div class="bar-chart-container" id="bar-chart"></div>
@@ -297,25 +312,25 @@
                 </div>
             </div>
 
-            <div id="review-section" style="margin-top: 25px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 25px; border-radius: 22px; display: none; width: 100%; box-sizing: border-box;">
-                <h3 style="color: #c084fc; text-align: center;">📜 Detailed Review & Explanations</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 15px;">
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q1: Early Christian Mission</p><p style="font-size:12px;">Jesus directed His initial mission to the "lost sheep of the house of" which group?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Israel</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q2: Paul's Ministry</p><p style="font-size:12px;">Paul carried the Christian message beyond Jerusalem, conducting missions primarily in Asia Minor and which region?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Greece</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q3: Patristic Period</p><p style="font-size:12px;">Which church father taught that the church is a mixed body of saints and sinners?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Augustine</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q4: Medieval Monasticism</p><p style="font-size:12px;">Who served as the primary missionaries establishing monasteries in Ireland?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: St. Patrick</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q5: Conversion Methods</p><p style="font-size:12px;">What method of conversion involved leaders like Clovis or Charlemagne converting first?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Top-down ruler conversions</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q6: Mendicant Orders</p><p style="font-size:12px;">Which order founded by St. Francis of Assisi engaged in active preaching outside monastery walls?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Franciscans</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q7: Modern Missions Pioneer</p><p style="font-size:12px;">Who launched the Baptist Missionary Society in 1792, known as the "Father of Modern Missions"?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: William Carey</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q8: Voluntary Societies</p><p style="font-size:12px;">Who founded the China Inland Mission focusing on unreached inland territories?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Hudson Taylor</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q9: Global Shift</p><p style="font-size:12px;">In the 20th and 21st centuries, the center of gravity for Christian missions shifted to which region?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Global South</b></p></div>
-                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 14px; padding: 14px;"><p style="color:#38bdf8; font-weight:bold;">Q10: Mission Movement Nature</p><p style="font-size:12px;">Today, Christian mission has been transformed into a global, multi-directional movement known as what?</p><p style="color:#10b981; font-size:11.5px;"><b>Answer: Polycentrism</b></p></div>
+            <div id="review-section" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(168, 85, 247, 0.6); padding: 18px; border-radius: 18px; display: none; width: 100%; box-sizing: border-box;">
+                <h3 style="color: #c084fc; text-align: center; margin-top:0;">📜 Detailed Review & Explanations</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 10px;">
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q1: Early Christian Mission</p><p style="font-size:11.5px; margin:0;">Jesus directed His initial mission to Israel[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q2: Paul's Ministry</p><p style="font-size:11.5px; margin:0;">Paul conducted missions primarily in Asia Minor and Greece[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q3: Patristic Period</p><p style="font-size:11.5px; margin:0;">Augustine taught that the church is a mixed body[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q4: Medieval Monasticism</p><p style="font-size:11.5px; margin:0;">St. Patrick established monasteries in Ireland[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q5: Conversion Methods</p><p style="font-size:11.5px; margin:0;">Top-down ruler conversions (Clovis/Charlemagne)[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q6: Mendicant Orders</p><p style="font-size:11.5px; margin:0;">Franciscans preached outside monastery walls[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q7: Modern Missions</p><p style="font-size:11.5px; margin:0;">William Carey launched Baptist Missionary Society[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q8: Voluntary Societies</p><p style="font-size:11.5px; margin:0;">Hudson Taylor founded China Inland Mission[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q9: Global Shift</p><p style="font-size:11.5px; margin:0;">Center of gravity shifted to the Global South[cite: 1].</p></div>
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 10px;"><p style="color:#38bdf8; font-weight:bold; margin:0 0 4px 0;">Q10: Mission Movement</p><p style="font-size:11.5px; margin:0;">Transformed into global Polycentrism[cite: 1].</p></div>
                 </div>
             </div>
         </div>
 
         <div id="student-view" class="hidden">
-            <h1 id="group-title" style="color:#f3e8ff; font-size:22px; text-align:center;">Soul Dashboard</h1>
+            <h1 id="group-title" style="color:#f3e8ff; font-size:20px; text-align:center; margin: 4px 0;">Soul Dashboard</h1>
             <div class="header-bar">
                 <span id="student-timer">Time Left: 01:30</span>
                 <span id="group-score-display">Score: 0 / 10</span>
@@ -434,7 +449,7 @@
         </div>
     </div>
 
-    <!-- Servant of God Message Box (First Page Only) -->
+    <!-- Servant of God Message Box -->
     <div class="servant-message-box" id="servant-box">
         <p>📖 <b>SERVANT OF GOD MESSAGE:</b> "Whatever you do, work at it with all your heart, as working for the Lord..." – Colossians 3:23 ✨</p>
     </div>
@@ -453,7 +468,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             new QRCode(document.getElementById("qrcode"), {
-                text: window.location.href, width: 80, height: 80, colorDark: "#6b21a8", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H
+                text: window.location.href, width: 70, height: 70, colorDark: "#6b21a8", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H
             });
             lockQuizUI();
         });
