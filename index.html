@@ -12,8 +12,8 @@
             --primary-hover: #7c3aed;
             --success: #10b981;
             --danger: #f43f5e;
-            --card-bg-transparent: rgba(15, 23, 42, 0.4);
-            --card-bg-solid: rgba(15, 23, 42, 0.82); 
+            --card-bg-transparent: rgba(15, 23, 42, 0.45);
+            --card-bg-solid: rgba(15, 23, 42, 0.85); 
             --text-color: #ffffff;
         }
 
@@ -25,7 +25,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), 
-                        url('/background.jpg') no-repeat center center fixed;
+                        url('background.png') no-repeat center center fixed;
             background-size: cover;
             color: var(--text-color);
             margin: 0;
@@ -37,10 +37,29 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: center;
         }
 
         ::-webkit-scrollbar { display: none !important; width: 0px !important; }
         * { scrollbar-width: none !important; }
+
+        @keyframes floatingGlowAnim {
+            0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); }
+            50% { transform: translateY(-5px) scale(1.02); filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.9)); }
+            100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); }
+        }
+
+        @keyframes pulseGlowEffect {
+            0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(244, 114, 182, 0.8), inset 0 0 15px rgba(56, 189, 248, 0.5); }
+            100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+        }
+
+        @keyframes buttonBreathAnim {
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
+            50% { transform: scale(1.04); box-shadow: 0 6px 25px rgba(244, 114, 182, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5); }
+        }
 
         .top-controls {
             position: fixed; top: 15px; right: 18px; z-index: 100005; display: flex; gap: 10px; align-items: center;
@@ -49,13 +68,15 @@
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(124, 58, 237, 0.85));
             color: #f3e8ff; border: 1.5px solid rgba(255, 255, 255, 0.35); padding: 8px 16px;
             font-size: 13px; font-weight: 700; border-radius: 20px; cursor: pointer; backdrop-filter: blur(8px);
+            animation: buttonBreathAnim 3s infinite ease-in-out;
         }
         .surrender-btn { background: linear-gradient(135deg, rgba(244, 63, 94, 0.85), rgba(225, 29, 72, 0.85)); }
 
         .law-bg-element {
             position: fixed; font-size: 36px; opacity: 0.82; user-select: none; pointer-events: none; z-index: 2;
+            animation: floatingGlowAnim 4s infinite ease-in-out;
         }
-        .icon-1 { top: 6%; left: 2%; } .icon-2 { top: 10%; right: 3%; } .icon-3 { bottom: 22%; left: 3%; }
+        .icon-1 { top: 6%; left: 2%; } .icon-2 { top: 10%; right: 3%; animation-delay: 1s; } .icon-3 { bottom: 22%; left: 3%; animation-delay: 2s; }
 
         .side-profile-container {
             position: fixed; right: 0; bottom: 0; width: 270px; height: 62vh; z-index: 5; pointer-events: none; display: flex; align-items: flex-end; justify-content: flex-end;
@@ -64,12 +85,32 @@
 
         .qr-code-wrapper {
             position: fixed; z-index: 10; background: rgba(30, 41, 59, 0.75); border: 2px solid rgba(192, 132, 252, 0.6); padding: 8px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; right: 35px; bottom: 55vh;
+            animation: floatingGlowAnim 5s infinite ease-in-out;
         }
         .qr-code-wrapper p { margin: 3px 0 0 0; font-size: 10px; font-weight: bold; color: #f3e8ff; }
         #qrcode { padding: 5px; background: #ffffff; border-radius: 8px; }
 
+        /* Pinalaki at in-extend pababa ang main container para dumikit sa message box */
         .container { 
-            position: relative; z-index: 3; max-width: 950px; margin: 10px auto; background: var(--card-bg-transparent); padding: 24px 34px; border-radius: 24px; backdrop-filter: blur(6px); border: 1.5px solid rgba(255, 255, 255, 0.25); width: 100%; box-sizing: border-box;
+            position: relative; z-index: 3; max-width: 950px; width: 100%; margin: 10px auto 5px auto; 
+            background: var(--card-bg-transparent); padding: 32px 34px 42px 34px; border-radius: 28px; 
+            backdrop-filter: blur(8px); border: 2px solid rgba(192, 132, 252, 0.5); 
+            box-sizing: border-box;
+            animation: pulseGlowEffect 4s infinite ease-in-out;
+        }
+
+        /* Servant of God message box sa bandang baba */
+        .servant-message-box {
+            position: relative; z-index: 3; max-width: 950px; width: 100%; margin: 0 auto 10px auto;
+            background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(244, 114, 182, 0.6);
+            padding: 12px 20px; border-radius: 20px; text-align: center; backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            animation: floatingGlowAnim 4.5s infinite ease-in-out;
+        }
+        .servant-message-box p {
+            margin: 0; font-size: 13.5px; font-weight: 700; color: #f3e8ff;
+            text-shadow: 0 0 10px rgba(244, 114, 182, 0.8);
+            letter-spacing: 0.5px;
         }
 
         .judge-main-layout { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; align-items: stretch; width: 100%; }
@@ -80,19 +121,35 @@
         .podium-col { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
         .rank-bar-track { width: 100%; max-width: 52px; background: rgba(255, 255, 255, 0.12); border-radius: 12px 12px 0 0; display: flex; align-items: flex-end; height: 170px; border: 1.5px solid rgba(255, 255, 255, 0.25); }
         .rank-bar-fill { width: 100%; height: 0%; transition: height 0.6s ease; border-radius: 12px 12px 0 0; }
-        .glowing-frame { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 10px; }
+        .glowing-frame { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #f472b6, #38bdf8, #a855f7); margin-top: 10px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .glowing-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #1e293b; }
 
-        .app-logo { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.9); }
-        .animated-header-title { font-size: 24px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 10px 0 6px 0; }
-        .btn { background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 12px 24px; font-size: 15px; border-radius: 14px; cursor: pointer; font-weight: bold; margin: 8px auto; display: inline-block; }
+        .app-logo { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.9); animation: floatingGlowAnim 3.5s infinite ease-in-out; }
+        .animated-header-title { 
+            font-size: 24px; color: #fdf4ff; text-align: center; font-weight: 900; margin: 10px 0 6px 0;
+            text-shadow: 0 0 15px rgba(168, 85, 247, 0.8), 0 0 25px rgba(244, 114, 182, 0.6);
+            animation: floatingGlowAnim 4s infinite ease-in-out;
+        }
+        
+        .btn { 
+            background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 14px 28px; font-size: 15px; border-radius: 16px; cursor: pointer; font-weight: bold; margin: 8px auto; display: inline-block; 
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.5);
+            animation: buttonBreathAnim 3s infinite ease-in-out;
+        }
+        .btn:hover { transform: scale(1.05); }
+
+        .animated-main-btn {
+            padding: 16px 36px !important; font-size: 18px !important; border-radius: 18px !important;
+            background: linear-gradient(135deg, #c084fc, #7c3aed, #f472b6);
+            background-size: 200% 200%;
+        }
 
         .attorney-buttons-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 12px; margin-top: 10px; }
-        .attorney-buttons-container .group-btn { width: 100%; max-width: 320px; padding: 16px 20px; color: #ffffff; font-size: 16.5px; font-weight: bold; border: none; border-radius: 16px; cursor: pointer; }
-        .attorney-btn-1 { background: linear-gradient(135deg, #38bdf8, #0284c7) !important; }
-        .attorney-btn-2 { background: linear-gradient(135deg, #a855f7, #7c3aed) !important; }
-        .attorney-btn-3 { background: linear-gradient(135deg, #10b981, #059669) !important; }
-        .attorney-btn-4 { background: linear-gradient(135deg, #f43f5e, #be123c) !important; }
+        .attorney-buttons-container .group-btn { width: 100%; max-width: 320px; padding: 16px 20px; color: #ffffff; font-size: 16.5px; font-weight: bold; border: none; border-radius: 16px; cursor: pointer; animation: buttonBreathAnim 3s infinite ease-in-out; }
+        .attorney-btn-1 { background: linear-gradient(135deg, #38bdf8, #0284c7) !important; animation-delay: 0s !important; }
+        .attorney-btn-2 { background: linear-gradient(135deg, #a855f7, #7c3aed) !important; animation-delay: 0.5s !important; }
+        .attorney-btn-3 { background: linear-gradient(135deg, #10b981, #059669) !important; animation-delay: 1s !important; }
+        .attorney-btn-4 { background: linear-gradient(135deg, #f43f5e, #be123c) !important; animation-delay: 1.5s !important; }
 
         @media (min-width: 768px) {
             .attorney-buttons-container { flex-direction: row; justify-content: center; gap: 16px; }
@@ -113,11 +170,11 @@
         .options label { display: flex; align-items: center; padding: 8px 12px; background: rgba(14, 116, 144, 0.25); border: 1px solid rgba(56, 189, 248, 0.45); border-radius: 10px; cursor: pointer; font-size: 13px; color: #ffffff; font-weight: 600; }
         .options label input { margin-right: 10px; transform: scale(1.2); accent-color: #38bdf8; }
 
-        #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 20px; padding: 22px; text-align: center; font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 20px; }
+        #waiting-banner { background: linear-gradient(135deg, rgba(168, 85, 247, 0.95), rgba(244, 114, 182, 0.95)); border-radius: 20px; padding: 22px; text-align: center; font-size: 18px; font-weight: 900; color: #ffffff; margin-bottom: 20px; animation: floatingGlowAnim 3s infinite ease-in-out; }
         .option-correct { background: rgba(16, 185, 129, 0.45) !important; border-color: #10b981 !important; }
         .option-wrong { background: rgba(244, 63, 94, 0.45) !important; border-color: #f43f5e !important; }
 
-        #floating-timer-badge { position: fixed; top: 22px; left: 25px; width: 55px; height: 55px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; z-index: 10006; }
+        #floating-timer-badge { position: fixed; top: 22px; left: 25px; width: 55px; height: 55px; border-radius: 50%; background: #10b981; color: #ffffff; display: none; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; z-index: 10006; animation: floatingGlowAnim 2s infinite ease-in-out; }
         #feedback-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px 40px; border-radius: 20px; font-size: 24px; font-weight: 900; color: white; z-index: 10005; display: none; text-align: center; }
         .feedback-correct { background: #10b981; } .feedback-wrong { background: #f43f5e; }
 
@@ -148,7 +205,7 @@
     <div class="law-bg-element icon-3">👼</div>
 
     <div class="side-profile-container">
-        <img src="/my-photo.png" alt="Profile" class="side-profile-img">
+        <img src="my-photo.png" alt="Profile" class="side-profile-img">
     </div>
 
     <div class="qr-code-wrapper" id="qr-wrapper">
@@ -189,9 +246,10 @@
         </div>
     </div>
 
+    <!-- Main Container (Pinalaki at in-extend pababa) -->
     <div class="container" id="main-container">
         <div id="role-select">
-            <div style="text-align:center;"><img src="/logo.png" alt="Logo" class="app-logo"></div>
+            <div style="text-align:center;"><img src="logo.png" alt="Logo" class="app-logo"></div>
             <h1 class="animated-header-title">☁️ THEOLOGY 5 GROUP 1 QUICK ACTIVITY 🔥</h1>
             <p style="text-align:center; color: #e9d5ff;">Select your mode to begin:</p>
             <button class="btn animated-main-btn" style="margin-bottom: 12px; display:block; margin-left:auto; margin-right:auto;" onclick="selectRole('teacher')">☁️ God's Monitor to Earth 🌍</button>
@@ -361,6 +419,11 @@
         </div>
     </div>
 
+    <!-- Servant of God Message Box na idinagdag sa bandang ibaba ng first screen -->
+    <div class="servant-message-box">
+        <p>📖 "Whatever you do, work at it with all your heart, as working for the Lord..." – Colossians 3:23 ✨</p>
+    </div>
+
     <script>
         const socket = io();
         let myGroup = null;
@@ -494,7 +557,7 @@
             let chartHTML = '';
             sortedGroups.forEach(([group, score]) => {
                 let percentage = (score / 10) * 100;
-                let photoSrc = attorneyPhotos[group] || '/logo.png';
+                let photoSrc = attorneyPhotos[group] || 'logo.png';
                 let tSeconds = groupTimers[group] !== undefined ? groupTimers[group] : 90;
                 let timeText = `${Math.floor(tSeconds/60).toString().padStart(2,'0')}:${(tSeconds%60).toString().padStart(2,'0')}`;
                 chartHTML += `
@@ -512,7 +575,7 @@
             let podiumHTML = '';
             sortedGroups.forEach(([group, score], idx) => {
                 let heightPercent = Math.max((score / 10) * 100, 8);
-                let photoSrc = attorneyPhotos[group] || '/logo.png';
+                let photoSrc = attorneyPhotos[group] || 'logo.png';
                 podiumHTML += `
                     <div class="podium-col">
                         <div style="font-size:11px; font-weight:800; color:#fff; background:linear-gradient(135deg,#a855f7,#7c3aed); padding:2px 8px; border-radius:10px; margin-bottom:6px;">Top ${idx + 1}</div>
